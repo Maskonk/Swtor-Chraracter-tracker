@@ -5,9 +5,12 @@ class Characters extends Component {
     constructor() {
         super();
         this.state = {
-            characters: [{"name": "Fighterman", "class": "Sniper", "level": 70, "command_rank": 300, "social": 10, "valor": 60, "guild":                               "Darc"},
-                {"name": "Temido", "class": "Assassin", "level": 70, "command_rank": 300, "social": 10, "valor": 60, "guild": "Untempered                   Dread"}]
-        }
+            characters: [{"name": "Fighterman", "class": "Sniper", "level": 70, "command_rank": 300, "social": 10, "valor": 60, "guild": "Darc"},
+                {"name": "Temido", "class": "Assassin", "level": 70, "command_rank": 300, "social": 10, "valor": 60, "guild": "Untempered Dread"}],
+            characters2: []
+        };
+
+        fetch('127.0.0.1:3000/characters').then(res => console.log(res))//.then(data => {this.setState({characters2: data}); console.log(data)})
     }
 
     render() {
