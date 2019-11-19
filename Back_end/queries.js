@@ -17,8 +17,19 @@ const getCharacters = (request, response) => {
             response.status(500).json(error)
         }
         else {
-            response.json(results.rows)
+            response.status(200).json(results.rows)
         }})
+};
+
+const createCharacter = (request, response) => {
+    const { name, email } = request.body;
+
+    pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(201).send(`User added with ID: ${result.insertId}`)
+    })
 };
 
 module.exports = {getCharacters};
