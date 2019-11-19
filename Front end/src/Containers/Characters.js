@@ -21,7 +21,7 @@ class Characters extends Component {
         return (
             <React.Fragment>
                 <h1>Characters</h1>
-                <button><Link to="/new_character"> Add new character </Link> </button>
+                <button><Link to="/character/new"> Add new character </Link> </button>
                 <table>
                     <thead>
                         <tr>

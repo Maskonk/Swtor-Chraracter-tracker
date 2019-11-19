@@ -40,7 +40,7 @@ class Main extends Component {
                     <Nav/>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/characters" render={() => <Characters characters={this.state.characters} />} />
-                    <Route exact path="/new_character" component={NewCharacter} />
+                    <Route exact path="/character/new" component={NewCharacter} />
                     <Route path="/character/edit/:id" render={(props) => {
                         const id = props.match.params.id;
                         const character = this.findCharacterById(id);

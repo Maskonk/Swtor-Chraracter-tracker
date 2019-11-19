@@ -2,11 +2,19 @@ import React, {Component, Fragment} from 'react';
 import {useParams} from 'react-router-dom'
 import './NewCharacter.css';
 
-class NewCharacter extends Component {
+class EditCharacter extends Component {
     constructor(props) {
         super(props);
         this.state = {
             character: {},
+            name: "",
+            class_name: "",
+            role: "",
+            level: 1,
+            renown_rank: 1,
+            social: 1,
+            valor: 1,
+            guild: "",
             class_list: [],
             guild_list: [],
             character_fetched: false
@@ -25,10 +33,6 @@ class NewCharacter extends Component {
 
     componentDidMount() {
         const url = 'http://127.0.0.1:3000/';
-        console.log(this.props);
-
-
-        // console.log(id);
 
         fetch(url + "classes")
             .then(res => res.json())
@@ -41,6 +45,22 @@ class NewCharacter extends Component {
             .catch(err => console.error);
 
         this.setState({character_fetched: true})
+    }
+
+    componentDidUpdate(prevProps) {
+        if ((prevProps !== this.props) && (this.props.character)) {
+            this.setState({
+                name: this.props.character.character_name,
+                class_name: this.props.character.class_id,
+                role: this.props.character.role,
+                level: this.props.character.level,
+                renown_rank: this.props.character.renown_rank,
+                social: this.props.character.social_rank,
+                valor: this.props.character.valor_rank,
+                guild: this.props.character.guild_id
+            });
+            console.log(this.state)
+        }
     }
 
     handleNameChange(event) {
@@ -77,22 +97,23 @@ class NewCharacter extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        if (!this.state.name || !this.state.class_name || !this.state.role || !this.state.guild) {
+        console.log("here");
+        if (!this.props.character.character_name || !this.props.character.class_name || !this.props.character.role || !this.props.character.guild_id) {
             return
         }
         const payload = {
-            name: this.state.name,
-            class_name: this.state.class_name,
-            role: this.state.role,
-            level: this.state.level,
-            renown_rank: this.state.renown_rank,
-            social: this.state.social,
-            valor: this.state.valor,
-            guild: this.state.guild,
+            name: this.props.character.character_name,
+            class_name: this.props.character.class_id,
+            role: this.props.character.role,
+            level: this.props.character.level,
+            renown_rank: this.props.character.renown_rank,
+            social: this.props.character.social_rank,
+            valor: this.props.character.valor_rank,
+            guild: this.props.character.guild_id,
         };
-
-        fetch("http://127.0.0.1:3000/new_character", {
-            method: 'POST',
+        console.log(payload);
+        fetch("http://127.0.0.1:3000/character/edit/" + this.props.character.character_id, {
+            method: 'PUT',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json'}
         })
@@ -120,16 +141,16 @@ class NewCharacter extends Component {
                 <div className="form">
                     <form method="post" onSubmit={this.handleSubmit}>
                         <label htmlFor="name"> Name: </label>
-                        <input id="name" type="text" value={this.props.character.character_name} onChange={this.handleNameChange}/>
+                        <input id="name" type="text" defaultValue={this.props.character.character_name} onChange={this.handleNameChange}/>
                         <br />
                         <label htmlFor="class">Class: </label>
-                        <select name="class" value={this.props.character.class_name} onChange={this.handleClassChange}>
+                        <select name="class" defaultValue={this.props.character.class_name} onChange={this.handleClassChange}>
                             <option disabled> Select </option>
                             {class_data}
                         </select>
                         <br/>
                         <label htmlFor="role"> Role: </label>
-                        <select name="role" value={this.props.character.role} onChange={this.handleRoleChange}>
+                        <select name="role" defaultValue={this.props.character.role} onChange={this.handleRoleChange}>
                             <option disabled> Select </option>
                             <option>Damage</option>
                             <option>Healer</option>
@@ -137,19 +158,19 @@ class NewCharacter extends Component {
                         </select>
                         <br />
                         <label htmlFor="level"> Level: </label>
-                        <input id="name" type="number" value={this.props.character.level} onChange={this.handleLevelChange}/>
+                        <input id="name" type="number" defaultValue={this.props.character.level} onChange={this.handleLevelChange}/>
                         <br />
                         <label htmlFor="renown"> Renown Rank: </label>
-                        <input id="renown" type="number" value={this.props.character.renown_rank} onChange={this.handleRenownChange}/>
+                        <input id="renown" type="number" defaultValue={this.props.character.renown_rank} onChange={this.handleRenownChange}/>
                         <br />
                         <label htmlFor="social"> Social Rank: </label>
-                        <input id="social" type="number" value={this.props.character.social_rank} onChange={this.handleSocialChange}/>
+                        <input id="social" type="number" defaultValue={this.props.character.social_rank} onChange={this.handleSocialChange}/>
                         <br />
                         <label htmlFor="valor"> Valor Rank: </label>
-                        <input id="valor" type="number" value={this.props.character.valor_rank} onChange={this.handleValorChange}/>
+                        <input id="valor" type="number" defaultValue={this.props.character.valor_rank} onChange={this.handleValorChange}/>
                         <br />
                         <label htmlFor="guild"> Guild: </label>
-                        <select name="guild" value={this.props.character.guild_id} onChange={this.handleGuildChange}>
+                        <select name="guild" defaultValue={this.props.character.guild_id} onChange={this.handleGuildChange}>
                             <option disabled> Select </option>
                             {guild_data}
                         </select>
@@ -163,4 +184,4 @@ class NewCharacter extends Component {
 
 }
 
-export default NewCharacter;
+export default EditCharacter;
