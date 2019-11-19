@@ -17,6 +17,10 @@ app.get('/characters', db.getCharacters);
 
 app.get('/classes', db.getClasses);
 
+app.get('/guilds', db.getGuilds);
+
+app.post('/new_character', db.createCharacter);
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

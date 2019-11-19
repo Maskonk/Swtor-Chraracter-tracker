@@ -32,15 +32,28 @@ const getClasses = (request, response) => {
         }})
 };
 
-const createCharacter = (request, response) => {
-    const { name, email } = request.body;
+const getGuilds = (request, response) => {
+    pool.query('SELECT id, guild_name FROM guilds;', (error, results) => {
+        if (error) {
+            console.log(error);
+            response.status(500).json(error)
+        }
+        else {
+            response.status(200).json(results.rows)
+        }})
+};
 
-    pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+const createCharacter = (request, response) => {
+    const { name, class_name, role, level, renown_rank, social, valor, guild} = request.body;
+
+    pool.query('INSERT INTO characters (character_name, class, role, level, renown_rank, social_rank, valor_rank, guild)' +
+        ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [name, class_name, role, level, renown_rank, social, valor, guild],
+        (error, results) => {
         if (error) {
             throw error
         }
-        response.status(201).send(`User added with ID: ${result.insertId}`)
+        response.status(201).send(`User added with ID: ${results.insertId}`)
     })
 };
 
-module.exports = {getCharacters, getClasses, createCharacter};
+module.exports = {getCharacters, getClasses, getGuilds, createCharacter};
