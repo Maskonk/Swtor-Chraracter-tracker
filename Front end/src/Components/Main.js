@@ -13,7 +13,8 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            characters: []
+            characters: [],
+            selected_character: {}
         }
     }
 
@@ -44,7 +45,7 @@ class Main extends Component {
                     <Route path="/character/edit/:id" render={(props) => {
                         const id = props.match.params.id;
                         const character = this.findCharacterById(id);
-                        return <EditCharacter character={character}/>
+                        return <EditCharacter character={character} {...props}/>
                     }}/>
                     <Route exact path="/parses" component={Parses} />
                     <Route exact path="/stats" component={Stats} />
