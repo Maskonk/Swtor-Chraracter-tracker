@@ -1,18 +1,12 @@
 import React, {Component, Fragment} from 'react';
+import {useParams} from 'react-router-dom'
 import './NewCharacter.css';
 
 class NewCharacter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            class_name: "",
-            role: "",
-            level: 1,
-            renown_rank: 1,
-            social: 1,
-            valor: 1,
-            guild: "",
+            character: {},
             class_list: [],
             guild_list: []
         };
@@ -30,6 +24,9 @@ class NewCharacter extends Component {
 
     componentDidMount() {
         const url = 'http://127.0.0.1:3000/';
+
+
+        // console.log(id);
 
         fetch(url + "classes")
             .then(res => res.json())
@@ -111,11 +108,11 @@ class NewCharacter extends Component {
 
         return (
             <Fragment>
-                <h1> New Character </h1>
+                <h1> Edit Character  </h1>
                 <div className="form">
                     <form method="post" onSubmit={this.handleSubmit}>
                         <label htmlFor="name"> Name: </label>
-                        <input id="name" type="text" placeholder="Name" onChange={this.handleNameChange}/>
+                        <input id="name" type="text" value={this.state.name} onChange={this.handleNameChange}/>
                         <br />
                         <label htmlFor="class">Class: </label>
                         <select name="class" defaultValue="Select" onChange={this.handleClassChange}>

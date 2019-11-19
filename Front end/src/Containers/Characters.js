@@ -3,24 +3,9 @@ import './Characters.css';
 import { Link } from "react-router-dom";
 
 class Characters extends Component {
-    constructor() {
-        super();
-        this.state = {
-            characters: []
-        };
-    }
-
-    componentDidMount() {
-        const url = 'http://127.0.0.1:3000/characters';
-
-        fetch(url)
-            .then(res => res.json())
-            .then(characters => {this.setState({ characters: characters })})
-            .catch(err => console.error);
-    }
 
     render() {
-        const table_data = this.state.characters.map(character => {
+        const table_data = this.props.characters.map(character => {
             return (
                 <tr key={character.id}>
                     <td>{character.character_name}</td>
@@ -30,6 +15,7 @@ class Characters extends Component {
                     <td>{character.social_rank}</td>
                     <td>{character.valor_rank}</td>
                     <td>{character.guild_name}</td>
+                    <td><button><Link to={`/character/edit/${character.id}`}>Edit</Link></button></td>
                 </tr>
             )});
         return (

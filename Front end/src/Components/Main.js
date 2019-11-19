@@ -3,19 +3,42 @@ import Characters from "../Containers/Characters";
 import Home from "./Home";
 import Parses from "../Containers/Parses";
 import Stats from "../Containers/Stats";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./Nav";
 import NewCharacter from "./NewCharacter";
+import EditCharacter from "./EditCharacter";
 
 class Main extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            characters: []
+        }
+    }
+
+    componentDidMount() {
+        const url = 'http://127.0.0.1:3000/characters';
+
+        fetch(url)
+            .then(res => res.json())
+            .then(characters => {this.setState({ characters: characters })})
+            .catch(err => console.error);
+    }
+
     render() {
         return (
             <Router>
                 <React.Fragment>
                     <Nav/>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/characters" component={Characters} />
+                    <Route exact path="/characters" render={() => <Characters characters={this.state.characters} />} />
                     <Route exact path="/new_character" component={NewCharacter} />
+                    <Route path="/character/edit/:id" render={(props) => {
+                        const id = props.match.params.id;
+                        const booking = this.findBookingsById(id);
+                        return <EditCharacter booking={booking} handleBookingUpdate={this.handleBookingUpdate}/>
+                    }}/>
                     <Route exact path="/parses" component={Parses} />
                     <Route exact path="/stats" component={Stats} />
                 </React.Fragment>
