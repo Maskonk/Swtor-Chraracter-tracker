@@ -5,9 +5,7 @@ class Characters extends Component {
     constructor() {
         super();
         this.state = {
-            characters: [{"name": "Fighterman", "class": "Sniper", "level": 70, "command_rank": 300, "social": 10, "valor": 60, "guild": "Darc"},
-                {"name": "Temido", "class": "Assassin", "level": 70, "command_rank": 300, "social": 10, "valor": 60, "guild": "Untempered Dread"}],
-            characters2: []
+            characters: []
         };
     }
 
@@ -16,12 +14,12 @@ class Characters extends Component {
 
         fetch(url)
             .then(res => res.json())
-            .then(characters => {this.setState({ characters2: characters })})
+            .then(characters => {this.setState({ characters: characters })})
             .catch(err => console.error);
     }
 
     render() {
-        const table_data = this.state.characters2.map(character => {
+        const table_data = this.state.characters.map(character => {
             return (
                 <tr>
                     <td>{character.character_name}</td>
@@ -33,7 +31,6 @@ class Characters extends Component {
                     <td>{character.guild_name}</td>
                 </tr>
             )});
-        console.log(this.state.characters2);
         return (
             <React.Fragment>
                 <h1>Characters</h1>
