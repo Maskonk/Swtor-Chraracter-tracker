@@ -5,6 +5,7 @@ import Parses from "../Containers/Parses";
 import Stats from "../Containers/Stats";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
+import NewCharacter from "./NewCharacter";
 
 class Main extends Component {
     render() {
@@ -14,6 +15,7 @@ class Main extends Component {
                     <Nav/>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/characters" component={Characters} />
+                    <Route exact path="/new_character" component={NewCharacter} />
                     <Route exact path="/parses" component={Parses} />
                     <Route exact path="/stats" component={Stats} />
                 </React.Fragment>

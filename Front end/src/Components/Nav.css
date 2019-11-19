@@ -1,13 +1,15 @@
 ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    /*padding: 0;*/
     width: 10%;
     background-color: #f1f1f1;
     position: fixed;
     overflow: auto;
     height: 100%;
     float: left;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 li {

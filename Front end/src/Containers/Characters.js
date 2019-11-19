@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Characters.css';
+import { Link } from "react-router-dom";
 
 class Characters extends Component {
     constructor() {
@@ -34,6 +35,7 @@ class Characters extends Component {
         return (
             <React.Fragment>
                 <h1>Characters</h1>
+                <button><Link to="/new_character"> Add new character </Link> </button>
                 <table>
                     <thead>
                         <tr>

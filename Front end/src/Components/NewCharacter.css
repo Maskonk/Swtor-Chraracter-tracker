@@ -1,0 +1,13 @@
+.form {
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 5px;
+    display: block;
+}
+
+form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
