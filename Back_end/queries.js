@@ -8,9 +8,9 @@ const pool = new Pool({
 });
 
 const getCharacters = (request, response) => {
-    pool.query('SELECT characters.id, characters.character_name, classes.class_name, guilds.guild_name, factions.faction_name, ' +
-        'role, level, social_rank, valor_rank, renown_rank FROM characters ' +
-        'join guilds on characters.guild = guilds.id join classes on characters.class = classes.id ' +
+    pool.query('SELECT characters.id character_id, characters.character_name, classes.class_name, role, level, ' +
+        'social_rank, valor_rank, renown_rank, guilds.id guild_id, guilds.guild_name, factions.id faction_id, factions.faction_name ' +
+        'FROM characters join guilds on characters.guild = guilds.id join classes on characters.class = classes.id ' +
         'join factions on classes.faction = factions.id;', (error, results) => {
         if (error) {
             console.log(error);
