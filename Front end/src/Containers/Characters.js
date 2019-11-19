@@ -7,7 +7,7 @@ class Characters extends Component {
     render() {
         const table_data = this.props.characters.map(character => {
             return (
-                <tr key={character.id}>
+                <tr key={character.character_id}>
                     <td>{character.character_name}</td>
                     <td>{character.class_name}</td>
                     <td>{character.level}</td>
@@ -15,7 +15,7 @@ class Characters extends Component {
                     <td>{character.social_rank}</td>
                     <td>{character.valor_rank}</td>
                     <td>{character.guild_name}</td>
-                    <td><button><Link to={`/character/edit/${character.id}`}>Edit</Link></button></td>
+                    <td><button><Link to={`/character/edit/${character.character_id}`}>Edit</Link></button></td>
                 </tr>
             )});
         return (

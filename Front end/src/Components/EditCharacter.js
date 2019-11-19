@@ -8,7 +8,8 @@ class NewCharacter extends Component {
         this.state = {
             character: {},
             class_list: [],
-            guild_list: []
+            guild_list: [],
+            character_fetched: false
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -24,6 +25,7 @@ class NewCharacter extends Component {
 
     componentDidMount() {
         const url = 'http://127.0.0.1:3000/';
+        console.log(this.props);
 
 
         // console.log(id);
@@ -37,6 +39,8 @@ class NewCharacter extends Component {
             .then(res => res.json())
             .then(guilds => {this.setState({ guild_list: guilds })})
             .catch(err => console.error);
+
+        this.setState({character_fetched: true})
     }
 
     handleNameChange(event) {
@@ -106,22 +110,26 @@ class NewCharacter extends Component {
                 <option key={guild.id} value={guild.id}>{guild.guild_name}</option>
             )});
 
+        if (!this.state.character_fetched) {
+            return null
+        }
+
         return (
             <Fragment>
                 <h1> Edit Character  </h1>
                 <div className="form">
                     <form method="post" onSubmit={this.handleSubmit}>
                         <label htmlFor="name"> Name: </label>
-                        <input id="name" type="text" value={this.state.name} onChange={this.handleNameChange}/>
+                        <input id="name" type="text" value={this.props.character.character_name} onChange={this.handleNameChange}/>
                         <br />
                         <label htmlFor="class">Class: </label>
-                        <select name="class" defaultValue="Select" onChange={this.handleClassChange}>
+                        <select name="class" value={this.props.character.class_name} onChange={this.handleClassChange}>
                             <option disabled> Select </option>
                             {class_data}
                         </select>
                         <br/>
                         <label htmlFor="role"> Role: </label>
-                        <select name="role" defaultValue="Select" onChange={this.handleRoleChange}>
+                        <select name="role" value={this.props.character.role} onChange={this.handleRoleChange}>
                             <option disabled> Select </option>
                             <option>Damage</option>
                             <option>Healer</option>
@@ -129,19 +137,19 @@ class NewCharacter extends Component {
                         </select>
                         <br />
                         <label htmlFor="level"> Level: </label>
-                        <input id="name" type="number" defaultValue="1" onChange={this.handleLevelChange}/>
+                        <input id="name" type="number" value={this.props.character.level} onChange={this.handleLevelChange}/>
                         <br />
                         <label htmlFor="renown"> Renown Rank: </label>
-                        <input id="renown" type="number" defaultValue="1" onChange={this.handleRenownChange}/>
+                        <input id="renown" type="number" value={this.props.character.renown_rank} onChange={this.handleRenownChange}/>
                         <br />
                         <label htmlFor="social"> Social Rank: </label>
-                        <input id="social" type="number" defaultValue="1" onChange={this.handleSocialChange}/>
+                        <input id="social" type="number" value={this.props.character.social_rank} onChange={this.handleSocialChange}/>
                         <br />
                         <label htmlFor="valor"> Valor Rank: </label>
-                        <input id="valor" type="number" defaultValue="1" onChange={this.handleValorChange}/>
+                        <input id="valor" type="number" value={this.props.character.valor_rank} onChange={this.handleValorChange}/>
                         <br />
                         <label htmlFor="guild"> Guild: </label>
-                        <select name="guild" defaultValue="Select" onChange={this.handleGuildChange}>
+                        <select name="guild" value={this.props.character.guild_id} onChange={this.handleGuildChange}>
                             <option disabled> Select </option>
                             {guild_data}
                         </select>

@@ -26,6 +26,13 @@ class Main extends Component {
             .catch(err => console.error);
     }
 
+    findCharacterById(id) {
+        console.log(this.state.characters);
+        const character = this.state.characters.find(character => character.character_id === id);
+        console.log(character);
+        return character
+    }
+
     render() {
         return (
             <Router>
@@ -36,8 +43,8 @@ class Main extends Component {
                     <Route exact path="/new_character" component={NewCharacter} />
                     <Route path="/character/edit/:id" render={(props) => {
                         const id = props.match.params.id;
-                        const booking = this.findBookingsById(id);
-                        return <EditCharacter booking={booking} handleBookingUpdate={this.handleBookingUpdate}/>
+                        const character = this.findCharacterById(id);
+                        return <EditCharacter character={character}/>
                     }}/>
                     <Route exact path="/parses" component={Parses} />
                     <Route exact path="/stats" component={Stats} />
