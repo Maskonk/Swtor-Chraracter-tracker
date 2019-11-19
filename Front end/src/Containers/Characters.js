@@ -9,8 +9,15 @@ class Characters extends Component {
                 {"name": "Temido", "class": "Assassin", "level": 70, "command_rank": 300, "social": 10, "valor": 60, "guild": "Untempered Dread"}],
             characters2: []
         };
+    }
 
-        fetch('127.0.0.1:3000/characters').then(res => console.log(res))//.then(data => {this.setState({characters2: data}); console.log(data)})
+    componentDidMount() {
+        const url = 'http://127.0.0.1:3000/characters';
+
+        fetch(url)
+            .then(res => res.json())
+            .then(characters => {this.setState({ characters2: characters })})
+            .catch(err => console.error);
     }
 
     render() {
@@ -26,20 +33,25 @@ class Characters extends Component {
                     <td>{character.guild}</td>
                 </tr>
             )});
+        console.log(this.state.characters2);
         return (
             <React.Fragment>
                 <h1>Characters</h1>
                 <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Class</th>
-                        <th>Level</th>
-                        <th>Command Rank</th>
-                        <th>Social</th>
-                        <th>Valor</th>
-                        <th>Guild</th>
-                    </tr>
-                    {table_data}
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>Level</th>
+                            <th>Command Rank</th>
+                            <th>Social</th>
+                            <th>Valor</th>
+                            <th>Guild</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {table_data}
+                    </tbody>
                 </table>
             </React.Fragment>
 
