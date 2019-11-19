@@ -21,6 +21,17 @@ const getCharacters = (request, response) => {
         }})
 };
 
+const getClasses = (request, response) => {
+    pool.query('SELECT id, class_name FROM classes;', (error, results) => {
+        if (error) {
+            console.log(error);
+            response.status(500).json(error)
+        }
+        else {
+            response.status(200).json(results.rows)
+        }})
+};
+
 const createCharacter = (request, response) => {
     const { name, email } = request.body;
 
@@ -32,4 +43,4 @@ const createCharacter = (request, response) => {
     })
 };
 
-module.exports = {getCharacters};
+module.exports = {getCharacters, getClasses, createCharacter};

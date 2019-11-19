@@ -15,6 +15,8 @@ app.get('/', (req, res) => {
 
 app.get('/characters', db.getCharacters);
 
+app.get('/classes', db.getClasses);
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
