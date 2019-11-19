@@ -8,7 +8,7 @@ const pool = new Pool({
 });
 
 const getCharacters = (request, response) => {
-    pool.query('SELECT characters.id character_id, characters.character_name, classes.class_name, role, level, ' +
+    pool.query('SELECT characters.id character_id, characters.character_name, classes.id class_id, classes.class_name, role, level, ' +
         'social_rank, valor_rank, renown_rank, guilds.id guild_id, guilds.guild_name, factions.id faction_id, factions.faction_name ' +
         'FROM characters join guilds on characters.guild = guilds.id join classes on characters.class = classes.id ' +
         'join factions on classes.faction = factions.id;', (error, results) => {
@@ -56,4 +56,21 @@ const createCharacter = (request, response) => {
     })
 };
 
-module.exports = {getCharacters, getClasses, getGuilds, createCharacter};
+const updateCharacter = (request, response) => {
+    const id = parseInt(request.params.id);
+    const { name, class_name, role, level, renown_rank, social, valor, guild } = request.body;
+    console.log(request.body);
+    pool.query(
+        'UPDATE characters SET character_name = $1, class = $2, role=$3, level=$4, renown_rank=$5, social_rank=$6, valor_rank=$7, guild=$8' +
+        ' WHERE id = $9',
+        [name, class_name, role, level, renown_rank, social, valor, guild, id],
+        (error, results) => {
+            if (error) {
+                throw error
+            }
+            response.status(200).send(`User modified with ID: ${id}`)
+        }
+    )
+};
+
+module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter};

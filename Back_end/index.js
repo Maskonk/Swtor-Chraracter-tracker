@@ -21,6 +21,8 @@ app.get('/guilds', db.getGuilds);
 
 app.post('/new_character', db.createCharacter);
 
+app.put('/character/edit/:id', db.updateCharacter);
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
