@@ -21,16 +21,16 @@ class Characters extends Component {
     }
 
     render() {
-        const table_data = this.state.characters.map(character => {
+        const table_data = this.state.characters2.map(character => {
             return (
                 <tr>
-                    <td>{character.name}</td>
-                    <td>{character.class}</td>
+                    <td>{character.character_name}</td>
+                    <td>{character.class_name}</td>
                     <td>{character.level}</td>
-                    <td>{character.command_rank}</td>
-                    <td>{character.social}</td>
-                    <td>{character.valor}</td>
-                    <td>{character.guild}</td>
+                    <td>{character.renown_rank}</td>
+                    <td>{character.social_rank}</td>
+                    <td>{character.valor_rank}</td>
+                    <td>{character.guild_name}</td>
                 </tr>
             )});
         console.log(this.state.characters2);
