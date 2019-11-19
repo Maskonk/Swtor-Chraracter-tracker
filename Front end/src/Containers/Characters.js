@@ -21,7 +21,7 @@ class Characters extends Component {
     render() {
         const table_data = this.state.characters.map(character => {
             return (
-                <tr>
+                <tr key={character.id}>
                     <td>{character.character_name}</td>
                     <td>{character.class_name}</td>
                     <td>{character.level}</td>
