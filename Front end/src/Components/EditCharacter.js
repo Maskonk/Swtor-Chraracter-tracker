@@ -11,7 +11,7 @@ class EditCharacter extends Component {
             guild_list: [],
             character_fetched: false
         };
-        this.handleLocalSubmit = this.handleLocalSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -30,25 +30,34 @@ class EditCharacter extends Component {
         this.setState({character_fetched: true})
     }
 
-    componentDidUpdate(prevProps) {
-        if ((prevProps !== this.props) && (this.props.character)) {
-            this.setState({
-                name: this.props.character.character_name,
-                class_name: this.props.character.class_id,
-                role: this.props.character.role,
-                level: this.props.character.level,
-                renown_rank: this.props.character.renown_rank,
-                social: this.props.character.social_rank,
-                valor: this.props.character.valor_rank,
-                guild: this.props.character.guild_id
-            });
+    handleSubmit(event) {
+        event.preventDefault();
+        if (!this.props.selected_character.character_name || !this.props.selected_character.class_name ||
+            !this.props.selected_character.role || !this.props.selected_character.guild_id) {
+            return
         }
+        const payload = {
+            name: this.props.selected_character.character_name,
+            class_name: this.props.selected_character.class_id,
+            role: this.props.selected_character.role,
+            level: this.props.selected_character.level,
+            renown_rank: this.props.selected_character.renown_rank,
+            social: this.props.selected_character.social_rank,
+            valor: this.props.selected_character.valor_rank,
+            guild: this.props.selected_character.guild_id,
+        };
+        return fetch("http://127.0.0.1:3000/character/edit/" + this.props.selected_character.character_id, {
+            method: 'PUT',
+            body: JSON.stringify(payload),
+            headers: { 'Content-Type': 'application/json'}
+        })
+            .then(res => this.props.history.push('/characters/'));
     }
 
-    handleLocalSubmit(event) {
-        this.props.handleSubmit(event)
-            .then(res => this.props.history.push('/characters/'))
-    }
+    // handleLocalSubmit(event) {
+    //     this.props.handleSubmit(event)
+    //         .then(res => this.props.history.push('/characters/'))
+    // }
 
 
     render() {
@@ -70,7 +79,7 @@ class EditCharacter extends Component {
             <Fragment>
                 <h1> Edit Character  </h1>
                 <div className="form">
-                    <form method="post" onSubmit={this.props.handleSubmit}>
+                    <form method="post" onSubmit={this.handleSubmit}>
                         <label htmlFor="name"> Name: </label>
                         <input id="name" type="text" defaultValue={this.props.character.character_name} onChange={this.props.handleNameChange}/>
                         <br />

@@ -3,7 +3,7 @@ import Characters from "../Containers/Characters";
 import Home from "./Home";
 import Parses from "../Containers/Parses";
 import Stats from "../Containers/Stats";
-import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
 import NewCharacter from "./NewCharacter";
 import EditCharacter from "./EditCharacter";
@@ -25,7 +25,6 @@ class Main extends Component {
         this.handleSocialChange = this.handleSocialChange.bind(this);
         this.handleValorChange = this.handleValorChange.bind(this);
         this.handleGuildChange = this.handleGuildChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -93,31 +92,6 @@ class Main extends Component {
         this.setState({selected_character: character});
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        console.log("here");
-        if (!this.state.selected_character.character_name || !this.state.selected_character.class_name ||
-            !this.state.selected_character.role || !this.state.selected_character.guild_id) {
-            return
-        }
-        const payload = {
-            name: this.state.selected_character.character_name,
-            class_name: this.state.selected_character.class_id,
-            role: this.state.selected_character.role,
-            level: this.state.selected_character.level,
-            renown_rank: this.state.selected_character.renown_rank,
-            social: this.state.selected_character.social_rank,
-            valor: this.state.selected_character.valor_rank,
-            guild: this.state.selected_character.guild_id,
-        };
-        return fetch("http://127.0.0.1:3000/character/edit/" + this.state.selected_character.character_id, {
-            method: 'PUT',
-            body: JSON.stringify(payload),
-            headers: { 'Content-Type': 'application/json'}
-        })
-            .then(res => this.props.history.push('/characters/'));
-    }
-
     render() {
         return (
             <Router>
@@ -138,7 +112,7 @@ class Main extends Component {
                                               handleSocialChange={this.handleSocialChange}
                                               handleValorChange={this.handleValorChange}
                                               handleGuildChange={this.handleGuildChange}
-                                              handleSubmit={this.handleSubmit}
+                                              selected_character={this.state.selected_character}
                                               {...props} />
                     }}/>
                     <Route exact path="/parses" component={Parses} />
