@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import {useParams} from 'react-router-dom'
 import './NewCharacter.css';
 
 class EditCharacter extends Component {
@@ -7,28 +6,11 @@ class EditCharacter extends Component {
         super(props);
         this.state = {
             character: {},
-            name: "",
-            class_name: "",
-            role: "",
-            level: 1,
-            renown_rank: 1,
-            social: 1,
-            valor: 1,
-            guild: "",
             class_list: [],
             guild_list: [],
             character_fetched: false
         };
 
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleClassChange = this.handleClassChange.bind(this);
-        this.handleRoleChange = this.handleRoleChange.bind(this);
-        this.handleLevelChange = this.handleLevelChange.bind(this);
-        this.handleRenownChange = this.handleRenownChange.bind(this);
-        this.handleSocialChange = this.handleSocialChange.bind(this);
-        this.handleValorChange = this.handleValorChange.bind(this);
-        this.handleGuildChange = this.handleGuildChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -59,66 +41,10 @@ class EditCharacter extends Component {
                 valor: this.props.character.valor_rank,
                 guild: this.props.character.guild_id
             });
-            console.log(this.state)
         }
     }
 
-    handleNameChange(event) {
-        this.setState({name: event.target.value});
-    }
 
-    handleClassChange(event) {
-        this.setState({class_name: event.target.value});
-    }
-
-    handleRoleChange(event) {
-        this.setState({role: event.target.value});
-    }
-
-    handleLevelChange(event) {
-        this.setState({level: event.target.value});
-    }
-
-    handleRenownChange(event) {
-        this.setState({renown_rank: event.target.value});
-    }
-
-    handleSocialChange(event) {
-        this.setState({social: event.target.value});
-    }
-
-    handleValorChange(event) {
-        this.setState({valor: event.target.value});
-    }
-
-    handleGuildChange(event) {
-        this.setState({guild: event.target.value});
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        console.log("here");
-        if (!this.props.character.character_name || !this.props.character.class_name || !this.props.character.role || !this.props.character.guild_id) {
-            return
-        }
-        const payload = {
-            name: this.props.character.character_name,
-            class_name: this.props.character.class_id,
-            role: this.props.character.role,
-            level: this.props.character.level,
-            renown_rank: this.props.character.renown_rank,
-            social: this.props.character.social_rank,
-            valor: this.props.character.valor_rank,
-            guild: this.props.character.guild_id,
-        };
-        console.log(payload);
-        fetch("http://127.0.0.1:3000/character/edit/" + this.props.character.character_id, {
-            method: 'PUT',
-            body: JSON.stringify(payload),
-            headers: { 'Content-Type': 'application/json'}
-        })
-            .then(res => this.props.history.push('/characters/'));
-    }
 
     render() {
         const class_data = this.state.class_list.map(class_name => {
@@ -139,18 +65,18 @@ class EditCharacter extends Component {
             <Fragment>
                 <h1> Edit Character  </h1>
                 <div className="form">
-                    <form method="post" onSubmit={this.handleSubmit}>
+                    <form method="post" onSubmit={this.props.handleSubmit}>
                         <label htmlFor="name"> Name: </label>
-                        <input id="name" type="text" defaultValue={this.props.character.character_name} onChange={this.handleNameChange}/>
+                        <input id="name" type="text" defaultValue={this.props.character.character_name} onChange={this.props.handleNameChange}/>
                         <br />
                         <label htmlFor="class">Class: </label>
-                        <select name="class" defaultValue={this.props.character.class_name} onChange={this.handleClassChange}>
+                        <select name="class" defaultValue={this.props.character.class_name} onChange={this.props.handleClassChange}>
                             <option disabled> Select </option>
                             {class_data}
                         </select>
                         <br/>
                         <label htmlFor="role"> Role: </label>
-                        <select name="role" defaultValue={this.props.character.role} onChange={this.handleRoleChange}>
+                        <select name="role" defaultValue={this.props.character.role} onChange={this.props.handleRoleChange}>
                             <option disabled> Select </option>
                             <option>Damage</option>
                             <option>Healer</option>
@@ -158,19 +84,19 @@ class EditCharacter extends Component {
                         </select>
                         <br />
                         <label htmlFor="level"> Level: </label>
-                        <input id="name" type="number" defaultValue={this.props.character.level} onChange={this.handleLevelChange}/>
+                        <input id="name" type="number" defaultValue={this.props.character.level} onChange={this.props.handleLevelChange}/>
                         <br />
                         <label htmlFor="renown"> Renown Rank: </label>
-                        <input id="renown" type="number" defaultValue={this.props.character.renown_rank} onChange={this.handleRenownChange}/>
+                        <input id="renown" type="number" defaultValue={this.props.character.renown_rank} onChange={this.props.handleRenownChange}/>
                         <br />
                         <label htmlFor="social"> Social Rank: </label>
-                        <input id="social" type="number" defaultValue={this.props.character.social_rank} onChange={this.handleSocialChange}/>
+                        <input id="social" type="number" defaultValue={this.props.character.social_rank} onChange={this.props.handleSocialChange}/>
                         <br />
                         <label htmlFor="valor"> Valor Rank: </label>
-                        <input id="valor" type="number" defaultValue={this.props.character.valor_rank} onChange={this.handleValorChange}/>
+                        <input id="valor" type="number" defaultValue={this.props.character.valor_rank} onChange={this.props.handleValorChange}/>
                         <br />
                         <label htmlFor="guild"> Guild: </label>
-                        <select name="guild" defaultValue={this.props.character.guild_id} onChange={this.handleGuildChange}>
+                        <select name="guild" defaultValue={this.props.character.guild_name} onChange={this.props.handleGuildChange}>
                             <option disabled> Select </option>
                             {guild_data}
                         </select>
