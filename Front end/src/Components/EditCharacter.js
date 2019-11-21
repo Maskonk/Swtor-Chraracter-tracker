@@ -98,16 +98,16 @@ class EditCharacter extends Component {
                         </select>
                         <br />
                         <label htmlFor="level"> Level: </label>
-                        <input id="name" type="number" defaultValue={this.props.character.level} onChange={this.props.handleLevelChange}/>
+                        <input id="name" type="number" defaultValue={this.props.character.level} onChange={this.props.handleLevelChange} min="1" max="75"/>
                         <br />
                         <label htmlFor="renown"> Renown Rank: </label>
-                        <input id="renown" type="number" defaultValue={this.props.character.renown_rank} onChange={this.props.handleRenownChange}/>
+                        <input id="renown" type="number" defaultValue={this.props.character.renown_rank} onChange={this.props.handleRenownChange} min="0" max="999"/>
                         <br />
                         <label htmlFor="social"> Social Rank: </label>
-                        <input id="social" type="number" defaultValue={this.props.character.social_rank} onChange={this.props.handleSocialChange}/>
+                        <input id="social" type="number" defaultValue={this.props.character.social_rank} onChange={this.props.handleSocialChange} min="1" max="10"/>
                         <br />
                         <label htmlFor="valor"> Valor Rank: </label>
-                        <input id="valor" type="number" defaultValue={this.props.character.valor_rank} onChange={this.props.handleValorChange}/>
+                        <input id="valor" type="number" defaultValue={this.props.character.valor_rank} onChange={this.props.handleValorChange} min="1" max="100"/>
                         <br />
                         <label htmlFor="guild"> Guild: </label>
                         <select name="guild" value={this.props.character.guild_id} onChange={this.props.handleGuildChange}>

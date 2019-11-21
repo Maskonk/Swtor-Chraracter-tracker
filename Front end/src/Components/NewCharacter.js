@@ -132,16 +132,16 @@ class NewCharacter extends Component {
                         </select>
                         <br />
                         <label htmlFor="level"> Level: </label>
-                        <input id="name" type="number" defaultValue="1" onChange={this.handleLevelChange}/>
+                        <input id="name" type="number" defaultValue="1" onChange={this.handleLevelChange} min="1" max="75"/>
                         <br />
                         <label htmlFor="renown"> Renown Rank: </label>
-                        <input id="renown" type="number" defaultValue="1" onChange={this.handleRenownChange}/>
+                        <input id="renown" type="number" defaultValue="1" onChange={this.handleRenownChange} min="0" max="999"/>
                         <br />
                         <label htmlFor="social"> Social Rank: </label>
-                        <input id="social" type="number" defaultValue="1" onChange={this.handleSocialChange}/>
+                        <input id="social" type="number" defaultValue="1" onChange={this.handleSocialChange} min="1" max="10"/>
                         <br />
                         <label htmlFor="valor"> Valor Rank: </label>
-                        <input id="valor" type="number" defaultValue="1" onChange={this.handleValorChange}/>
+                        <input id="valor" type="number" defaultValue="1" onChange={this.handleValorChange} min="1" max="100"/>
                         <br />
                         <label htmlFor="guild"> Guild: </label>
                         <select name="guild" defaultValue="Select" onChange={this.handleGuildChange}>

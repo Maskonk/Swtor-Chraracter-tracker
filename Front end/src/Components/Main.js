@@ -14,7 +14,11 @@ class Main extends Component {
         super(props);
         this.state = {
             characters: [],
-            selected_character: {}
+            selected_character: {},
+            sort: {
+                column: null,
+                direction: 'desc',
+            }
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -25,6 +29,7 @@ class Main extends Component {
         this.handleSocialChange = this.handleSocialChange.bind(this);
         this.handleValorChange = this.handleValorChange.bind(this);
         this.handleGuildChange = this.handleGuildChange.bind(this);
+        this.onSort = this.onSort.bind(this);
     }
 
     componentDidMount() {
@@ -92,13 +97,45 @@ class Main extends Component {
         this.setState({selected_character: character});
     }
 
+    onSort(column)  {
+        const direction = this.state.sort.column ? (this.state.sort.direction === 'asc' ? 'desc' : 'asc') : 'desc';
+        const sortedData = this.state.characters.sort((a, b) => {
+            if (isNaN(a[column])) {
+                if (a[column] > b[column]) {
+                    return 1
+                }
+                if (a[column] < b[column]) {
+                    return -1
+                }
+                return 0
+            }
+            else {
+                return a[column] - b[column]
+            }
+
+        });
+
+        if (direction === 'desc') {
+            sortedData.reverse();
+        }
+
+        this.setState({
+            characters: sortedData,
+            sort: {
+                column,
+                direction,
+            }
+        });
+    };
+
+
     render() {
         return (
             <Router>
                 <React.Fragment>
                     <Nav/>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/characters" render={() => <Characters characters={this.state.characters} />} />
+                    <Route exact path="/characters" render={() => <Characters characters={this.state.characters} onSort={this.onSort} sortFields={this.state.sort} />} />
                     <Route exact path="/character/new" component={NewCharacter} />
                     <Route path="/character/edit/:id" render={(props) => {
                         const id = props.match.params.id;

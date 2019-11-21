@@ -1,10 +1,23 @@
 table, th, td {
-    width: 100px;
-    padding: 10px;
+    width: auto;
+    padding: 5px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10%;
     text-align: center;
     border: 1px solid black;
+}
+
+.Tank, .Republic {
+    background-color: deepskyblue;
+}
+
+.Damage, .Imperial {
+    background-color: #DD1E1E;
+}
+
+.Healer {
+    background-color: limegreen;
 }
 
 table {

@@ -1,37 +1,48 @@
 import React, {Component} from 'react';
 import './Characters.css';
 import { Link } from "react-router-dom";
+import TableHeader from "../Components/TableHeader";
 
 class Characters extends Component {
+    constructor(props) {
+        super(props);
+
+    }
 
     render() {
-        const table_data = this.props.characters.map(character => {
+        const table_data = this.props.characters.map((character, index) => {
             return (
-                <tr key={character.character_id}>
-                    <td>{character.character_name}</td>
-                    <td>{character.class_name}</td>
+                <tr key={index}>
+                    <td> {index+1} </td>
+                    <td className={character.faction_name}>{character.character_name}</td>
+                    <td className={character.faction_name}>{character.class_name}</td>
+                    <td className={character.role}>{character.role}</td>
                     <td>{character.level}</td>
                     <td>{character.renown_rank}</td>
                     <td>{character.social_rank}</td>
                     <td>{character.valor_rank}</td>
                     <td>{character.guild_name}</td>
                     <td><button><Link to={`/character/edit/${character.character_id}`}>Edit</Link></button></td>
+                    {/*<td><form action={`http://127.0.0.1:3000/character/delete/${character.character_id}`}*/}
+                    {/*          method="delete"><button type="submit">Delete</button></form></td>*/}
                 </tr>
             )});
         return (
             <React.Fragment>
-                <h1>Characters</h1>
+                <h2>Characters</h2>
                 <button><Link to="/character/new"> Add new character </Link> </button>
                 <table>
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Class</th>
-                            <th>Level</th>
-                            <th>Command Rank</th>
-                            <th>Social</th>
-                            <th>Valor</th>
-                            <th>Guild</th>
+                            <th> </th>
+                            <TableHeader headerName="Name" headerId="character_name" onSort={this.props.onSort} />
+                            <TableHeader headerName="Class" headerId="class_name" onSort={this.props.onSort}/>
+                            <TableHeader headerName="Role" headerId="role" onSort={this.props.onSort}/>
+                            <TableHeader headerName="Level" headerId="level" onSort={this.props.onSort}/>
+                            <TableHeader headerName="Renown Rank" headerId="renown_rank" onSort={this.props.onSort}/>
+                            <TableHeader headerName="Social" headerId="social_rank" onSort={this.props.onSort} />
+                            <TableHeader headerName="Valor" headerId="valor_rank" onSort={this.props.onSort}/>
+                            <TableHeader headerName="Guild" headerId="guild_name" onSort={this.props.onSort}/>
                         </tr>
                     </thead>
                     <tbody>
