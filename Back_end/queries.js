@@ -82,6 +82,6 @@ const deleteCharacter = (request, response) => {
         }
         response.status(200).send(`User deleted with ID: ${id}`)
     })
-}
+};
 
 module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter};
