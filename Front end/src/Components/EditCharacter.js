@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import './NewCharacter.css';
+import {withRouter} from 'react-router-dom';
 
 class EditCharacter extends Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class EditCharacter extends Component {
             guild_list: [],
             character_fetched: false
         };
-
+        this.handleLocalSubmit = this.handleLocalSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -44,6 +45,10 @@ class EditCharacter extends Component {
         }
     }
 
+    handleLocalSubmit(event) {
+        this.props.handleSubmit(event)
+            .then(res => this.props.history.push('/characters/'))
+    }
 
 
     render() {
@@ -110,4 +115,4 @@ class EditCharacter extends Component {
 
 }
 
-export default EditCharacter;
+export default withRouter(EditCharacter);

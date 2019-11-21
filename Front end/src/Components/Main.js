@@ -3,7 +3,7 @@ import Characters from "../Containers/Characters";
 import Home from "./Home";
 import Parses from "../Containers/Parses";
 import Stats from "../Containers/Stats";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, withRouter } from "react-router-dom";
 import Nav from "./Nav";
 import NewCharacter from "./NewCharacter";
 import EditCharacter from "./EditCharacter";
@@ -58,27 +58,39 @@ class Main extends Component {
     }
 
     handleRoleChange(event) {
-        this.setState({role: event.target.value});
+        let character = this.state.selected_character;
+        character.role = event.target.value;
+        this.setState({selected_character: character});
     }
 
     handleLevelChange(event) {
-        this.setState({level: event.target.value});
+        let character = this.state.selected_character;
+        character.level = event.target.value;
+        this.setState({selected_character: character});
     }
 
     handleRenownChange(event) {
-        this.setState({renown_rank: event.target.value});
+        let character = this.state.selected_character;
+        character.renown_rank = event.target.value;
+        this.setState({selected_character: character});
     }
 
     handleSocialChange(event) {
-        this.setState({social: event.target.value});
+        let character = this.state.selected_character;
+        character.social_rank = event.target.value;
+        this.setState({selected_character: character});
     }
 
     handleValorChange(event) {
-        this.setState({valor: event.target.value});
+        let character = this.state.selected_character;
+        character.valor_rank = event.target.value;
+        this.setState({selected_character: character});
     }
 
     handleGuildChange(event) {
-        this.setState({guild: event.target.value});
+        let character = this.state.selected_character;
+        character.guild_id = event.target.value;
+        this.setState({selected_character: character});
     }
 
     handleSubmit(event) {
@@ -98,7 +110,7 @@ class Main extends Component {
             valor: this.state.selected_character.valor_rank,
             guild: this.state.selected_character.guild_id,
         };
-        fetch("http://127.0.0.1:3000/character/edit/" + this.state.selected_character.character_id, {
+        return fetch("http://127.0.0.1:3000/character/edit/" + this.state.selected_character.character_id, {
             method: 'PUT',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json'}
