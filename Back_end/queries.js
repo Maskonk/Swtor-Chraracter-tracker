@@ -73,4 +73,15 @@ const updateCharacter = (request, response) => {
     )
 };
 
-module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter};
+const deleteCharacter = (request, response) => {
+    const id = parseInt(request.params.id);
+
+    pool.query('DELETE FROM characters WHERE id = $1', [id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).send(`User deleted with ID: ${id}`)
+    })
+}
+
+module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter};
