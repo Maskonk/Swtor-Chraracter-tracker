@@ -70,7 +70,7 @@ class EditCharacter extends Component {
                         <input id="name" type="text" defaultValue={this.props.character.character_name} onChange={this.props.handleNameChange}/>
                         <br />
                         <label htmlFor="class">Class: </label>
-                        <select name="class" defaultValue={this.props.character.class_name} onChange={this.props.handleClassChange}>
+                        <select name="class" value={this.props.character.class_id} onChange={this.props.handleClassChange}>
                             <option disabled> Select </option>
                             {class_data}
                         </select>
@@ -96,7 +96,7 @@ class EditCharacter extends Component {
                         <input id="valor" type="number" defaultValue={this.props.character.valor_rank} onChange={this.props.handleValorChange}/>
                         <br />
                         <label htmlFor="guild"> Guild: </label>
-                        <select name="guild" defaultValue={this.props.character.guild_name} onChange={this.props.handleGuildChange}>
+                        <select name="guild" value={this.props.character.guild_id} onChange={this.props.handleGuildChange}>
                             <option disabled> Select </option>
                             {guild_data}
                         </select>

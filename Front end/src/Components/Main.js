@@ -42,7 +42,6 @@ class Main extends Component {
         if (this.state.selected_character !== character) {
             this.setState({selected_character: character});
         }
-        console.log(this.state);
         return character;
     }
 
@@ -53,7 +52,9 @@ class Main extends Component {
     }
 
     handleClassChange(event) {
-        this.setState({class_name: event.target.value});
+        let character = this.state.selected_character;
+        character.class_id = event.target.value;
+        this.setState({selected_character: character});
     }
 
     handleRoleChange(event) {
@@ -97,7 +98,6 @@ class Main extends Component {
             valor: this.state.selected_character.valor_rank,
             guild: this.state.selected_character.guild_id,
         };
-        console.log(payload);
         fetch("http://127.0.0.1:3000/character/edit/" + this.state.selected_character.character_id, {
             method: 'PUT',
             body: JSON.stringify(payload),
@@ -127,7 +127,7 @@ class Main extends Component {
                                               handleValorChange={this.handleValorChange}
                                               handleGuildChange={this.handleGuildChange}
                                               handleSubmit={this.handleSubmit}
-                                              {...props}/>
+                                              {...props} />
                     }}/>
                     <Route exact path="/parses" component={Parses} />
                     <Route exact path="/stats" component={Stats} />
