@@ -84,4 +84,17 @@ const deleteCharacter = (request, response) => {
     })
 };
 
-module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter};
+const getParses = (request, response) => {
+    pool.query('SELECT parses.id, characters.character_name, classes.class_name, specs.spec_name, dps FROM parses ' +
+        'JOIN characters on parses.character = characters.id JOIN specs on parses.spec = specs.id ' +
+        'JOIN classes on specs.class_id = classes.id;', (error, results) => {
+        if (error) {
+            console.log(error);
+            response.status(500).json(error)
+        }
+        else {
+            response.status(200).json(results.rows)
+        }})
+};
+
+module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter, getParses};

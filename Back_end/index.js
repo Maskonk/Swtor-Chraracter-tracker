@@ -20,6 +20,8 @@ app.put('/character/edit/:id', db.updateCharacter);
 
 app.delete('/character/delete/:id', db.deleteCharacter);
 
+app.get('/parses', db.getParses);
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
