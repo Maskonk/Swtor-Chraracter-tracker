@@ -12,6 +12,7 @@ class EditCharacter extends Component {
             character_fetched: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -54,11 +55,18 @@ class EditCharacter extends Component {
             .then(res => this.props.history.push('/characters/'));
     }
 
-    // handleLocalSubmit(event) {
-    //     this.props.handleSubmit(event)
-    //         .then(res => this.props.history.push('/characters/'))
-    // }
-
+    handleDelete(event) {
+        console.log(this.props.character.character_id);
+        const payload = {
+            id: this.props.character.character_id
+        };
+        fetch("http://127.0.0.1:3000/character/delete/" + this.props.selected_character.character_id, {
+            method: 'DELETE',
+            body: JSON.stringify(payload),
+            headers: { 'Content-Type': 'application/json'}
+        })
+            .then(res => this.props.history.push('/characters/'));
+    }
 
     render() {
         const class_data = this.state.class_list.map(class_name => {
@@ -71,13 +79,14 @@ class EditCharacter extends Component {
                 <option key={guild.id} value={guild.id}>{guild.guild_name}</option>
             )});
 
-        if (!this.state.character_fetched) {
+        if (!this.props.character) {
             return null
         }
 
         return (
             <Fragment>
                 <h1> Edit Character  </h1>
+                <button onClick={this.handleDelete}>Delete Character</button>
                 <div className="form">
                     <form method="post" onSubmit={this.handleSubmit}>
                         <label htmlFor="name"> Name: </label>

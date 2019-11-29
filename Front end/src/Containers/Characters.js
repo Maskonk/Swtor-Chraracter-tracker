@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import TableHeader from "../Components/TableHeader";
 
 class Characters extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
         const table_data = this.props.characters.map((character, index) => {
@@ -35,14 +31,14 @@ class Characters extends Component {
                     <thead>
                         <tr>
                             <th> </th>
-                            <TableHeader headerName="Name" headerId="character_name" onSort={this.props.onSort} />
-                            <TableHeader headerName="Class" headerId="class_name" onSort={this.props.onSort}/>
-                            <TableHeader headerName="Role" headerId="role" onSort={this.props.onSort}/>
-                            <TableHeader headerName="Level" headerId="level" onSort={this.props.onSort}/>
-                            <TableHeader headerName="Renown Rank" headerId="renown_rank" onSort={this.props.onSort}/>
-                            <TableHeader headerName="Social" headerId="social_rank" onSort={this.props.onSort} />
-                            <TableHeader headerName="Valor" headerId="valor_rank" onSort={this.props.onSort}/>
-                            <TableHeader headerName="Guild" headerId="guild_name" onSort={this.props.onSort}/>
+                            <TableHeader headerName="Name" headerId="character_name" onSort={this.props.onSort} sortFields={this.props.sortFields} />
+                            <TableHeader headerName="Class" headerId="class_name" onSort={this.props.onSort} sortFields={this.props.sortFields}  />
+                            <TableHeader headerName="Role" headerId="role" onSort={this.props.onSort} sortFields={this.props.sortFields}  />
+                            <TableHeader headerName="Level" headerId="level" onSort={this.props.onSort} sortFields={this.props.sortFields}  />
+                            <TableHeader headerName="Renown Rank" headerId="renown_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} />
+                            <TableHeader headerName="Social" headerId="social_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} />
+                            <TableHeader headerName="Valor" headerId="valor_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} />
+                            <TableHeader headerName="Guild" headerId="guild_name" onSort={this.props.onSort} sortFields={this.props.sortFields} />
                         </tr>
                     </thead>
                     <tbody>
