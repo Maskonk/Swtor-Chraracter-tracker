@@ -48,3 +48,9 @@ button {
 .desc {
      border-top: 5px solid black;
  }
+
+.filters {
+    display: inline-flex;
+    width: 20%;
+    margin-left: 41%;
+}

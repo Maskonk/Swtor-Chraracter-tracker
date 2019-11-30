@@ -27,6 +27,15 @@ class Characters extends Component {
             <React.Fragment>
                 <h2>Characters</h2>
                 <button><Link to="/character/new"> Add new character </Link> </button>
+                <h3>Filters</h3>
+                <div className="filters">
+                    <button>All</button>
+                    <button>75s</button>
+                    <button> Non 75s</button>
+                    <button> Tanks </button>
+                    <button> DPS </button>
+                    <button> Healers </button>
+                </div>
                 <table>
                     <thead>
                         <tr>
