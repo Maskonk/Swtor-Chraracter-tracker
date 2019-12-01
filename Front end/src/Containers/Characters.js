@@ -37,23 +37,23 @@ class Characters extends Component {
             this.setState({filtered_data: this.props.characters})
         }
         else if (filter === "75") {
-            newFilter = this.props.characters.filter(character => {return character.level === "75"});
+            newFilter = this.state.filtered_data.filter(character => {return character.level === "75"});
             this.setState({filtered_data: newFilter});
         }
         else if (filter === "!75") {
-            newFilter = this.props.characters.filter(character => {return character.level !== "75"});
+            newFilter = this.state.filtered_data.filter(character => {return character.level !== "75"});
             this.setState({filtered_data: newFilter});
         }
         else if (filter === "Tank") {
-            newFilter = this.props.characters.filter(character => {return character.role === "Tank"});
+            newFilter = this.state.filtered_data.filter(character => {return character.role === "Tank"});
             this.setState({filtered_data: newFilter});
         }
         else if (filter === "DPS") {
-            newFilter = this.props.characters.filter(character => {return character.role === "Damage"});
+            newFilter = this.state.filtered_data.filter(character => {return character.role === "Damage"});
             this.setState({filtered_data: newFilter});
         }
         else if (filter === "Healer") {
-            newFilter = this.props.characters.filter(character => {return character.role === "Healer"});
+            newFilter = this.state.filtered_data.filter(character => {return character.role === "Healer"});
             this.setState({filtered_data: newFilter});
         }
     }
