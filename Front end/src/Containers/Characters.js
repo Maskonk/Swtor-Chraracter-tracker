@@ -9,16 +9,16 @@ class Characters extends Component {
         super(props);
         this.state = {
             filter: null,
-            filtered_data: []
+            filtered_data: [],
+            filters: {
+                level: null,
+                faction: null,
+                role: null
+            }
         };
 
-        this.handleAll = this.handleAll.bind(this);
         this.filterData = this.filterData.bind(this);
-        this.handle75 = this.handle75.bind(this);
-        this.handleNot75 = this.handleNot75.bind(this);
-        this.handleTank = this.handleTank.bind(this);
-        this.handleDamage = this.handleDamage.bind(this);
-        this.handleHeals = this.handleHeals.bind(this);
+        this.handleLevelChange = this.handleLevelChange.bind(this);
     }
 
     componentDidMount() {
@@ -31,54 +31,56 @@ class Characters extends Component {
         }
     }
 
-    filterData(filter) {
-        let newFilter = [];
-        if (filter === "All") {
-            this.setState({filtered_data: this.props.characters})
+    filterData() {
+        let newFilter = this.props.characters;
+
+        if (this.state.filters.level) {
+            if (this.state.filters.level === "!75") {
+                newFilter = newFilter.filter(character => {return character.level !== "75"})
+            }
+            else {
+                newFilter = newFilter.filter(character => {
+                    return character.level === this.state.filters.level
+                })
+            }
         }
-        else if (filter === "75") {
-            newFilter = this.state.filtered_data.filter(character => {return character.level === "75"});
-            this.setState({filtered_data: newFilter});
-        }
-        else if (filter === "!75") {
-            newFilter = this.state.filtered_data.filter(character => {return character.level !== "75"});
-            this.setState({filtered_data: newFilter});
-        }
-        else if (filter === "Tank") {
-            newFilter = this.state.filtered_data.filter(character => {return character.role === "Tank"});
-            this.setState({filtered_data: newFilter});
-        }
-        else if (filter === "DPS") {
-            newFilter = this.state.filtered_data.filter(character => {return character.role === "Damage"});
-            this.setState({filtered_data: newFilter});
-        }
-        else if (filter === "Healer") {
-            newFilter = this.state.filtered_data.filter(character => {return character.role === "Healer"});
-            this.setState({filtered_data: newFilter});
-        }
+        this.setState({filtered_data: newFilter})
     }
 
-    handleAll() {
-        this.filterData("All");
-    }
+    // handleAll() {
+    //     this.filterData("All");
+    // }
+    //
+    // // handle75() {
+    // //     this.filterData("75");
+    // // }
+    // //
+    // // handleNot75() {
+    // //     this.filterData("!75");
+    // // }
+    //
+    // handleTank() {
+    //     this.filterData("Tank");
+    // }
+    //
+    // handleDamage() {
+    //     this.filterData("DPS");
+    // }
+    // handleHeals() {
+    //     this.filterData("Healer");
+    // }
 
-    handle75() {
-        this.filterData("75");
-    }
-
-    handleNot75() {
-        this.filterData("!75");
-    }
-
-    handleTank() {
-        this.filterData("Tank");
-    }
-
-    handleDamage() {
-        this.filterData("DPS");
-    }
-    handleHeals() {
-        this.filterData("Healer");
+    handleLevelChange(event) {
+        let filters = this.state.filters;
+        if (event.target.value === "All"){
+                        filters.level = null;
+            this.setState({filters: filters})
+        }
+        else {
+            filters.level = event.target.value;
+            this.setState({filters: filters})
+        }
+        this.filterData();
     }
 
     render() {
@@ -104,12 +106,18 @@ class Characters extends Component {
                 <button><Link to="/character/new"> Add new character </Link> </button>
                 <h3>Filters</h3>
                 <div className="filters">
-                    <button onClick={this.handleAll}>All</button>
-                    <button onClick={this.handle75}>75s</button>
-                    <button onClick={this.handleNot75}> Non 75s</button>
-                    <button onClick={this.handleTank}> Tanks </button>
-                    <button onClick={this.handleDamage}> DPS </button>
-                    <button onClick={this.handleHeals}> Healers </button>
+                    <button>All</button>
+                    <label htmlFor="level">Level: </label>
+                    <select id="level" onChange={this.handleLevelChange}>
+                        <option value="All">All</option>
+                        <option value="75">75s</option>
+                        <option value="!75">Non 75s</option>
+                    </select>
+                    {/*<button onClick={this.handle75}>75s</button>*/}
+                    {/*<button onClick={this.handleNot75}> Non 75s</button>*/}
+                    <button> Tanks </button>
+                    <button> DPS </button>
+                    <button> Healers </button>
                 </div>
                 <table>
                     <thead>

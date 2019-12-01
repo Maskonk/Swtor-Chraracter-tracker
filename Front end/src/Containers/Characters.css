@@ -53,4 +53,9 @@ button {
     display: inline-flex;
     width: 20%;
     margin-left: 41%;
+    text-align: center;
+}
+
+select {
+    margin-bottom: 10px;
 }
