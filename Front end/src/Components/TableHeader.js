@@ -7,7 +7,7 @@ class TableHeader extends Component{
     }
 
     handleClick(event) {
-        this.props.onSort(this.props.headerId)
+        this.props.onSort(this.props.headerId, this.props.characterSet)
     }
 
     render() {

@@ -97,9 +97,9 @@ class Main extends Component {
         this.setState({selected_character: character});
     }
 
-    onSort(column)  {
+    onSort(column, characters)  {
         const direction = this.state.sort.column ? (this.state.sort.direction === 'asc' ? 'desc' : 'asc') : 'desc';
-        const sortedData = this.state.characters.sort((a, b) => {
+        const sortedData = characters.sort((a, b) => {
             if (isNaN(a[column])) {
                 if (a[column] > b[column]) {
                     return 1
