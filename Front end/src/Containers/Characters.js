@@ -16,6 +16,7 @@ class Characters extends Component {
         this.filterData = this.filterData.bind(this);
         this.handle75 = this.handle75.bind(this);
         this.handleNot75 = this.handleNot75.bind(this);
+        this.handleTank = this.handleTank.bind(this);
     }
 
     componentDidMount() {
@@ -28,34 +29,43 @@ class Characters extends Component {
         }
     }
 
-    filterData() {
+    filterData(filter) {
         let newFilter = [];
-        if (this.state.filter === null) {
+        if (filter === "All") {
             this.setState({filtered_data: this.props.characters})
         }
-        else if (this.state.filter === "75") {
+        else if (filter === "75") {
             newFilter = this.props.characters.filter(character => {return character.level === "75"});
             this.setState({filtered_data: newFilter});
         }
-        else if (this.state.filter === "!75") {
+        else if (filter === "!75") {
             newFilter = this.props.characters.filter(character => {return character.level !== "75"});
+            this.setState({filtered_data: newFilter});
+        }
+        else if (filter === "Tank") {
+            newFilter = this.props.characters.filter(character => {return character.role === "Tank"});
             this.setState({filtered_data: newFilter});
         }
     }
 
     handleAll() {
-        this.setState({filter: null});
-        this.filterData();
+        // this.setState({filter: null});
+        this.filterData("All");
     }
 
     handle75() {
-        this.setState({filter: "75"});
-        this.filterData();
+        // this.setState({filter: "75"});
+        this.filterData("75");
     }
 
     handleNot75() {
-        this.setState({filter: "!75"});
-        this.filterData();
+        // this.setState({filter: "!75"});
+        this.filterData("!75");
+    }
+
+    handleTank() {
+        // this.setState({filter: "Tank"});
+        this.filterData("Tank");
     }
 
     render() {
@@ -83,7 +93,7 @@ class Characters extends Component {
                     <button onClick={this.handleAll}>All</button>
                     <button onClick={this.handle75}>75s</button>
                     <button onClick={this.handleNot75}> Non 75s</button>
-                    <button> Tanks </button>
+                    <button onClick={this.handleTank}> Tanks </button>
                     <button> DPS </button>
                     <button> Healers </button>
                 </div>
