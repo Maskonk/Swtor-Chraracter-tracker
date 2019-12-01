@@ -49,22 +49,18 @@ class Characters extends Component {
     }
 
     handleAll() {
-        // this.setState({filter: null});
         this.filterData("All");
     }
 
     handle75() {
-        // this.setState({filter: "75"});
         this.filterData("75");
     }
 
     handleNot75() {
-        // this.setState({filter: "!75"});
         this.filterData("!75");
     }
 
     handleTank() {
-        // this.setState({filter: "Tank"});
         this.filterData("Tank");
     }
 
@@ -73,8 +69,9 @@ class Characters extends Component {
             return (
                 <tr key={index}>
                     <td> {index+1} </td>
-                    <td className={character.faction_name}>{character.character_name}</td>
-                    <td className={character.faction_name}>{character.class_name}</td>
+                    <td>{character.character_name}</td>
+                    <td>{character.class_name}</td>
+                    <td className={character.faction_name}>{character.faction_name}</td>
                     <td className={character.role}>{character.role}</td>
                     <td>{character.level}</td>
                     <td>{character.renown_rank}</td>
@@ -103,6 +100,7 @@ class Characters extends Component {
                             <th> </th>
                             <TableHeader headerName="Name" headerId="character_name" onSort={this.props.onSort} sortFields={this.props.sortFields} />
                             <TableHeader headerName="Class" headerId="class_name" onSort={this.props.onSort} sortFields={this.props.sortFields}  />
+                            <TableHeader headerName="Faction" headerId="faction_name" onSort={this.props.onSort} sortFields={this.props.sortFields}  />
                             <TableHeader headerName="Role" headerId="role" onSort={this.props.onSort} sortFields={this.props.sortFields}  />
                             <TableHeader headerName="Level" headerId="level" onSort={this.props.onSort} sortFields={this.props.sortFields}  />
                             <TableHeader headerName="Renown Rank" headerId="renown_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} />
