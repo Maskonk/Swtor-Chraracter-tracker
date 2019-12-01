@@ -17,6 +17,7 @@ class Characters extends Component {
         this.handle75 = this.handle75.bind(this);
         this.handleNot75 = this.handleNot75.bind(this);
         this.handleTank = this.handleTank.bind(this);
+        this.handleDamage = this.handleDamage.bind(this);
     }
 
     componentDidMount() {
@@ -46,6 +47,10 @@ class Characters extends Component {
             newFilter = this.props.characters.filter(character => {return character.role === "Tank"});
             this.setState({filtered_data: newFilter});
         }
+        else if (filter === "DPS") {
+            newFilter = this.props.characters.filter(character => {return character.role === "Damage"});
+            this.setState({filtered_data: newFilter});
+        }
     }
 
     handleAll() {
@@ -62,6 +67,10 @@ class Characters extends Component {
 
     handleTank() {
         this.filterData("Tank");
+    }
+
+    handleDamage() {
+        this.filterData("DPS");
     }
 
     render() {
@@ -91,7 +100,7 @@ class Characters extends Component {
                     <button onClick={this.handle75}>75s</button>
                     <button onClick={this.handleNot75}> Non 75s</button>
                     <button onClick={this.handleTank}> Tanks </button>
-                    <button> DPS </button>
+                    <button onClick={this.handleDamage}> DPS </button>
                     <button> Healers </button>
                 </div>
                 <table>
