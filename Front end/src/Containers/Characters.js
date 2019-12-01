@@ -5,8 +5,52 @@ import TableHeader from "../Components/TableHeader";
 
 class Characters extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            filter: null,
+            filtered_data: []
+        };
+
+        this.handleAll = this.handleAll.bind(this);
+        this.filterData = this.filterData.bind(this);
+        this.handle75 = this.handle75.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({filtered_data: this.props.characters})
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps !== this.props) {
+            this.setState({filtered_data: this.props.characters})
+        }
+    }
+
+    filterData() {
+        let newFilter = [];
+        if (this.state.filter === null) {
+            this.setState({filtered_data: this.props.characters})
+        }
+        else if (this.state.filter === "75") {
+            newFilter = this.state.filtered_data.filter(character => {return character.level === "75"});
+            this.setState({filtered_data: newFilter})
+        }
+        this.render()
+    }
+
+    handleAll() {
+        this.setState({filter: null});
+        this.filterData();
+    }
+
+    handle75() {
+        this.setState({filter: "75"});
+        this.filterData();
+    }
+
     render() {
-        const table_data = this.props.characters.map((character, index) => {
+        const table_data = this.state.filtered_data.map((character, index) => {
             return (
                 <tr key={index}>
                     <td> {index+1} </td>
@@ -19,8 +63,6 @@ class Characters extends Component {
                     <td>{character.valor_rank}</td>
                     <td>{character.guild_name}</td>
                     <td><button><Link to={`/character/edit/${character.character_id}`}>Edit</Link></button></td>
-                    {/*<td><form action={`http://127.0.0.1:3000/character/delete/${character.character_id}`}*/}
-                    {/*          method="delete"><button type="submit">Delete</button></form></td>*/}
                 </tr>
             )});
         return (
@@ -29,8 +71,8 @@ class Characters extends Component {
                 <button><Link to="/character/new"> Add new character </Link> </button>
                 <h3>Filters</h3>
                 <div className="filters">
-                    <button>All</button>
-                    <button>75s</button>
+                    <button onClick={this.handleAll}>All</button>
+                    <button onClick={this.handle75}>75s</button>
                     <button> Non 75s</button>
                     <button> Tanks </button>
                     <button> DPS </button>
