@@ -13,7 +13,8 @@ class Characters extends Component {
             filters: {
                 level: null,
                 faction: null,
-                role: null
+                role: null,
+                guild: null
             }
         };
 
@@ -21,6 +22,7 @@ class Characters extends Component {
         this.handleLevelChange = this.handleLevelChange.bind(this);
         this.handleRoleChange = this.handleRoleChange.bind(this);
         this.handleFactionChange = this.handleFactionChange.bind(this);
+        this.handleGuildChange = this.handleGuildChange.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +56,11 @@ class Characters extends Component {
         if (this.state.filters.faction) {
             newFilter = newFilter.filter(character => {
                 return character.faction_name === this.state.filters.faction
+            })
+        }
+        if (this.state.filters.guild) {
+            newFilter = newFilter.filter(character => {
+                return character.guild_id === this.state.filters.guild
             })
         }
         this.setState({filtered_data: newFilter})
@@ -93,6 +100,19 @@ class Characters extends Component {
         }
         else {
             filters.faction = event.target.value;
+            this.setState({filters: filters});
+        }
+        this.filterData();
+    }
+
+    handleGuildChange(event) {
+        let filters = this.state.filters;
+        if (event.target.value === "All"){
+            filters.guild = null;
+            this.setState({filters: filters});
+        }
+        else {
+            filters.guild = event.target.value;
             this.setState({filters: filters});
         }
         this.filterData();
@@ -148,7 +168,7 @@ class Characters extends Component {
                         <option value="Republic">Republic</option>
                     </select>&emsp;
                     <label htmlFor="guild">Guild: </label>&ensp;
-                    <select id="guild" onChange={this.handleRoleChange}>
+                    <select id="guild" onChange={this.handleGuildChange}>
                         <option value="All">All</option>
                         {guild_data}
                     </select>
