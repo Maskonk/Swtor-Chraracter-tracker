@@ -141,6 +141,17 @@ class Characters extends Component {
                 <option key={guild.id} value={guild.id}>{guild.guild_name}</option>
             )});
 
+        const count75s = this.state.filtered_data.reduce((total, character) =>
+        {if (character.level === "75")
+        {console.log(total); return total += 1}
+        else {
+            return total
+        }}, 0);
+
+        const averageRenown = (this.state.filtered_data.reduce((total, character) => {return total += parseInt(character.renown_rank)}, 0)/ this.state.filtered_data.length).toFixed(2);
+        const averageSocial = (this.state.filtered_data.reduce((total, character) => {return total += parseInt(character.social_rank)}, 0)/ this.state.filtered_data.length).toFixed(2);
+        const averageValor = (this.state.filtered_data.reduce((total, character) => {return total += parseInt(character.valor_rank)}, 0)/ this.state.filtered_data.length).toFixed(2);
+
         return (
             <React.Fragment>
                 <h2>Characters</h2>
@@ -189,6 +200,15 @@ class Characters extends Component {
                     </thead>
                     <tbody>
                         {table_data}
+                        <tr>
+                            <td colSpan="5">Averages and Totals:</td>
+                            <td>{count75s}</td>
+                            <td>{averageRenown}</td>
+                            <td>{averageSocial}</td>
+                            <td>{averageValor}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </React.Fragment>
