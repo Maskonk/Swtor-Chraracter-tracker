@@ -34,11 +34,6 @@ class NewCharacter extends Component {
             .then(res => res.json())
             .then(classes => {this.setState({ class_list: classes })})
             .catch(err => console.error);
-
-        // fetch(url + "guilds")
-        //     .then(res => res.json())
-        //     .then(guilds => {this.setState({ guild_list: guilds })})
-        //     .catch(err => console.error);
     }
 
     handleNameChange(event) {

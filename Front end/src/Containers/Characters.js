@@ -115,6 +115,12 @@ class Characters extends Component {
                     <td><button><Link to={`/character/edit/${character.character_id}`}>Edit</Link></button></td>
                 </tr>
             )});
+
+        const guild_data = this.props.guilds.map(guild => {
+            return (
+                <option key={guild.id} value={guild.id}>{guild.guild_name}</option>
+            )});
+
         return (
             <React.Fragment>
                 <h2>Characters</h2>
@@ -140,6 +146,11 @@ class Characters extends Component {
                         <option value="All">All</option>
                         <option value="Imperial">Imperial</option>
                         <option value="Republic">Republic</option>
+                    </select>&emsp;
+                    <label htmlFor="guild">Guild: </label>&ensp;
+                    <select id="guild" onChange={this.handleRoleChange}>
+                        <option value="All">All</option>
+                        {guild_data}
                     </select>
                 </div>
                 <table>

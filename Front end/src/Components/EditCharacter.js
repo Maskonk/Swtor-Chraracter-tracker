@@ -23,10 +23,6 @@ class EditCharacter extends Component {
             .then(classes => {this.setState({ class_list: classes })})
             .catch(err => console.error);
 
-        // fetch(url + "guilds")
-        //     .then(res => res.json())
-        //     .then(guilds => {this.setState({ guild_list: guilds })})
-        //     .catch(err => console.error);
 
         this.setState({character_fetched: true})
     }
