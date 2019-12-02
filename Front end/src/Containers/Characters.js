@@ -147,7 +147,6 @@ class Characters extends Component {
                 <button><Link to="/character/new"> Add new character </Link> </button>
                 <h3>Filters</h3>
                 <div className="filters">
-                    <button>All</button>&emsp;
                     <label htmlFor="faction">Faction: </label>&ensp;
                     <select id="faction" onChange={this.handleFactionChange}>
                         <option value="All">All</option>
