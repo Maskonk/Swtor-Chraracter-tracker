@@ -19,6 +19,8 @@ class Characters extends Component {
 
         this.filterData = this.filterData.bind(this);
         this.handleLevelChange = this.handleLevelChange.bind(this);
+        this.handleRoleChange = this.handleRoleChange.bind(this);
+        this.handleFactionChange = this.handleFactionChange.bind(this);
     }
 
     componentDidMount() {
@@ -34,6 +36,8 @@ class Characters extends Component {
     filterData() {
         let newFilter = this.props.characters;
 
+        // if (!this.state.filters.level && !this.state.filters.role)
+
         if (this.state.filters.level) {
             if (this.state.filters.level === "!75") {
                 newFilter = newFilter.filter(character => {return character.level !== "75"})
@@ -44,31 +48,18 @@ class Characters extends Component {
                 })
             }
         }
+        if (this.state.filters.role) {
+                newFilter = newFilter.filter(character => {
+                    return character.role === this.state.filters.role
+            })
+        }
+        if (this.state.filters.faction) {
+            newFilter = newFilter.filter(character => {
+                return character.faction_name === this.state.filters.faction
+            })
+        }
         this.setState({filtered_data: newFilter})
     }
-
-    // handleAll() {
-    //     this.filterData("All");
-    // }
-    //
-    // // handle75() {
-    // //     this.filterData("75");
-    // // }
-    // //
-    // // handleNot75() {
-    // //     this.filterData("!75");
-    // // }
-    //
-    // handleTank() {
-    //     this.filterData("Tank");
-    // }
-    //
-    // handleDamage() {
-    //     this.filterData("DPS");
-    // }
-    // handleHeals() {
-    //     this.filterData("Healer");
-    // }
 
     handleLevelChange(event) {
         let filters = this.state.filters;
@@ -79,6 +70,32 @@ class Characters extends Component {
         else {
             filters.level = event.target.value;
             this.setState({filters: filters})
+        }
+        this.filterData();
+    }
+
+    handleRoleChange(event) {
+        let filters = this.state.filters;
+        if (event.target.value === "All"){
+            filters.role = null;
+            this.setState({filters: filters});
+        }
+        else {
+            filters.role = event.target.value;
+            this.setState({filters: filters});
+        }
+        this.filterData();
+    }
+
+    handleFactionChange(event) {
+        let filters = this.state.filters;
+        if (event.target.value === "All"){
+            filters.faction = null;
+            this.setState({filters: filters});
+        }
+        else {
+            filters.faction = event.target.value;
+            this.setState({filters: filters});
         }
         this.filterData();
     }
@@ -106,18 +123,26 @@ class Characters extends Component {
                 <button><Link to="/character/new"> Add new character </Link> </button>
                 <h3>Filters</h3>
                 <div className="filters">
-                    <button>All</button>
-                    <label htmlFor="level">Level: </label>
+                    <button>All</button>&emsp;
+                    <label htmlFor="level">Level: </label>&ensp;
                     <select id="level" onChange={this.handleLevelChange}>
                         <option value="All">All</option>
                         <option value="75">75s</option>
                         <option value="!75">Non 75s</option>
+                    </select>&emsp;
+                    <label htmlFor="role">Role: </label>&ensp;
+                    <select id="role" onChange={this.handleRoleChange}>
+                        <option value="All">All</option>
+                        <option value="Tank">Tanks</option>
+                        <option value="Damage">DPS</option>
+                        <option value="Healer">Healers</option>
+                    </select>&emsp;
+                    <label htmlFor="faction">Faction: </label>&ensp;
+                    <select id="faction" onChange={this.handleFactionChange}>
+                        <option value="All">All</option>
+                        <option value="Imperial">Imperial</option>
+                        <option value="Republic">Republic</option>
                     </select>
-                    {/*<button onClick={this.handle75}>75s</button>*/}
-                    {/*<button onClick={this.handleNot75}> Non 75s</button>*/}
-                    <button> Tanks </button>
-                    <button> DPS </button>
-                    <button> Healers </button>
                 </div>
                 <table>
                     <thead>
