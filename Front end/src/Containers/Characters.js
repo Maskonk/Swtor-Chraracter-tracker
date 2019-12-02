@@ -148,11 +148,11 @@ class Characters extends Component {
                 <h3>Filters</h3>
                 <div className="filters">
                     <button>All</button>&emsp;
-                    <label htmlFor="level">Level: </label>&ensp;
-                    <select id="level" onChange={this.handleLevelChange}>
+                    <label htmlFor="faction">Faction: </label>&ensp;
+                    <select id="faction" onChange={this.handleFactionChange}>
                         <option value="All">All</option>
-                        <option value="75">75s</option>
-                        <option value="!75">Non 75s</option>
+                        <option value="Imperial">Imperial</option>
+                        <option value="Republic">Republic</option>
                     </select>&emsp;
                     <label htmlFor="role">Role: </label>&ensp;
                     <select id="role" onChange={this.handleRoleChange}>
@@ -161,11 +161,11 @@ class Characters extends Component {
                         <option value="Damage">DPS</option>
                         <option value="Healer">Healers</option>
                     </select>&emsp;
-                    <label htmlFor="faction">Faction: </label>&ensp;
-                    <select id="faction" onChange={this.handleFactionChange}>
+                    <label htmlFor="level">Level: </label>&ensp;
+                    <select id="level" onChange={this.handleLevelChange}>
                         <option value="All">All</option>
-                        <option value="Imperial">Imperial</option>
-                        <option value="Republic">Republic</option>
+                        <option value="75">75s</option>
+                        <option value="!75">Non 75s</option>
                     </select>&emsp;
                     <label htmlFor="guild">Guild: </label>&ensp;
                     <select id="guild" onChange={this.handleGuildChange}>
