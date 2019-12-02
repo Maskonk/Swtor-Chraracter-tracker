@@ -18,7 +18,8 @@ class Main extends Component {
             sort: {
                 column: null,
                 direction: 'desc',
-            }
+            },
+            guild_list: []
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -33,11 +34,16 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        const url = 'http://127.0.0.1:3000/characters';
+        const url = 'http://127.0.0.1:3000/';
 
-        fetch(url)
+        fetch(url + "characters")
             .then(res => res.json())
             .then(characters => {this.setState({ characters: characters })})
+            .catch(err => console.error);
+
+        fetch(url + "guilds")
+            .then(res => res.json())
+            .then(guilds => {this.setState({ guild_list: guilds })})
             .catch(err => console.error);
     }
 
@@ -135,8 +141,11 @@ class Main extends Component {
                 <React.Fragment>
                     <Nav/>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/characters" render={() => <Characters characters={this.state.characters} onSort={this.onSort} sortFields={this.state.sort} />} />
-                    <Route exact path="/character/new" component={NewCharacter} />
+                    <Route exact path="/characters" render={() => <Characters characters={this.state.characters}
+                                                                              onSort={this.onSort}
+                                                                              sortFields={this.state.sort}
+                                                                              guilds={this.state.guild_list}/>} />
+                    <Route exact path="/character/new" render={() => <NewCharacter guilds={this.state.guild_list}/>} />
                     <Route path="/character/edit/:id" render={(props) => {
                         const id = props.match.params.id;
                         const character = this.findCharacterById(id);
@@ -150,6 +159,7 @@ class Main extends Component {
                                               handleValorChange={this.handleValorChange}
                                               handleGuildChange={this.handleGuildChange}
                                               selected_character={this.state.selected_character}
+                                              guilds={this.state.guild_list}
                                               {...props} />
                     }}/>
                     <Route exact path="/parses" component={Parses} />

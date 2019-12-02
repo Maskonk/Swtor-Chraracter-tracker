@@ -23,10 +23,10 @@ class EditCharacter extends Component {
             .then(classes => {this.setState({ class_list: classes })})
             .catch(err => console.error);
 
-        fetch(url + "guilds")
-            .then(res => res.json())
-            .then(guilds => {this.setState({ guild_list: guilds })})
-            .catch(err => console.error);
+        // fetch(url + "guilds")
+        //     .then(res => res.json())
+        //     .then(guilds => {this.setState({ guild_list: guilds })})
+        //     .catch(err => console.error);
 
         this.setState({character_fetched: true})
     }
@@ -74,7 +74,7 @@ class EditCharacter extends Component {
                 <option key={class_name.id} value={class_name.id}>{class_name.class_name}</option>
             )});
 
-        const guild_data = this.state.guild_list.map(guild => {
+        const guild_data = this.props.guilds.map(guild => {
             return (
                 <option key={guild.id} value={guild.id}>{guild.guild_name}</option>
             )});

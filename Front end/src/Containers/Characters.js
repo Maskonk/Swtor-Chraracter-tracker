@@ -36,8 +36,6 @@ class Characters extends Component {
     filterData() {
         let newFilter = this.props.characters;
 
-        // if (!this.state.filters.level && !this.state.filters.role)
-
         if (this.state.filters.level) {
             if (this.state.filters.level === "!75") {
                 newFilter = newFilter.filter(character => {return character.level !== "75"})
