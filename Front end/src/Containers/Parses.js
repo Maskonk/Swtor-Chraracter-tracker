@@ -1,8 +1,8 @@
 import React, {Component, Fragment} from 'react';
 
 class Parses extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             parses: [{"character": "Fighterman", "class": "Sniper", "spec": "Virulence", "parse": 9557, "date":"05/11/19"},
                 {"character": "Temido", "class": "Assassin", "spec": "Hatred", "parse": 10208, "date":"01/11/19"}]
@@ -19,6 +19,7 @@ class Parses extends Component {
                 <td>{parse.date}</td>
             </tr>
         )});
+        console.log(this.props);
         return (
             <Fragment>
                 <h1>Parses</h1>

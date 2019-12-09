@@ -14,12 +14,13 @@ class Main extends Component {
         super(props);
         this.state = {
             characters: [],
+            guild_list: [],
+            parses: [],
             selected_character: {},
             sort: {
                 column: null,
                 direction: 'desc',
-            },
-            guild_list: []
+            }
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -44,6 +45,11 @@ class Main extends Component {
         fetch(url + "guilds")
             .then(res => res.json())
             .then(guilds => {this.setState({ guild_list: guilds })})
+            .catch(err => console.error);
+
+        fetch(url + "parses")
+            .then(res => res.json())
+            .then(parses => {this.setState({ parses: parses })})
             .catch(err => console.error);
     }
 
@@ -134,7 +140,6 @@ class Main extends Component {
         });
     };
 
-
     render() {
         return (
             <Router>
@@ -145,7 +150,8 @@ class Main extends Component {
                                                                               onSort={this.onSort}
                                                                               sortFields={this.state.sort}
                                                                               guilds={this.state.guild_list}/>} />
-                    <Route exact path="/character/new" render={() => <NewCharacter guilds={this.state.guild_list}/>} />
+                    <Route exact path="/character/new" render={(props) => <NewCharacter guilds={this.state.guild_list}
+                                      {...props}/>} />
                     <Route path="/character/edit/:id" render={(props) => {
                         const id = props.match.params.id;
                         const character = this.findCharacterById(id);
@@ -162,7 +168,8 @@ class Main extends Component {
                                               guilds={this.state.guild_list}
                                               {...props} />
                     }}/>
-                    <Route exact path="/parses" component={Parses} />
+                    <Route exact path="/parses" render={() => <Parses parses={this.state.characters}
+                                                                          />} />
                     <Route exact path="/stats" component={Stats} />
                 </React.Fragment>
             </Router>
