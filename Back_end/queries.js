@@ -43,7 +43,7 @@ const getGuilds = (request, response) => {
         }})
 };
 
-const getSpecs = (request, responce) => {
+const getSpecs = (request, response) => {
     pool.query('SELECT specs.id, specs.spec_name, specs.class_id, classes.class_name from specs join classes on specs.class_id = classes.id;', (error, results) => {
         if (error) {
             console.log(error);
