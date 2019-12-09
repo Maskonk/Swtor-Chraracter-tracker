@@ -22,6 +22,12 @@ app.delete('/character/delete/:id', db.deleteCharacter);
 
 app.get('/parses', db.getParses);
 
+app.post('/parses', db.createParse);
+
+app.put('parse/:id', db.updateParse);
+
+app.delete('parse/:id', db.deleteParse);
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
