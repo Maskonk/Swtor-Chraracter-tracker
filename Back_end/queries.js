@@ -43,6 +43,17 @@ const getGuilds = (request, response) => {
         }})
 };
 
+const getSpecs = (request, responce) => {
+    pool.query('SELECT specs.id, specs.spec_name, specs.class_id, classes.class_name from specs join classes on specs.class_id = classes.id;', (error, results) => {
+        if (error) {
+            console.log(error);
+            response.status(500).json(error)
+        }
+        else {
+            response.status(200).json(results.rows)
+        }})
+};
+
 const createCharacter = (request, response) => {
     const { name, class_name, role, level, renown_rank, social, valor, guild} = request.body;
 
