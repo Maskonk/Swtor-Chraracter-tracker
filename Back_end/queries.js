@@ -110,4 +110,20 @@ const createParse = (request, response) => {
         })
 };
 
+const updateParse = (request, response) => {
+    const id = parseInt(request.params.id);
+    const { dps } = request.body;
+    console.log(request.body);
+    pool.query(
+        'UPDATE parses SET dps = $2 WHERE id = $1',
+        [id, dps],
+        (error, results) => {
+            if (error) {
+                throw error
+            }
+            response.status(200).send(`User modified with ID: ${id}`)
+        }
+    )
+};
+
 module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter, getParses};
