@@ -97,4 +97,17 @@ const getParses = (request, response) => {
         }})
 };
 
+const createParse = (request, response) => {
+    const { character_id, spec_id, dps } = request.body;
+
+    pool.query('INSERT INTO parses (character, spec, dps)' +
+        ' VALUES ($1, $2, $3)', [character_id, spec_id, dps],
+        (error, results) => {
+            if (error) {
+                throw error
+            }
+            response.status(201).send(`User added with ID: ${results.insertId}`)
+        })
+};
+
 module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter, getParses};
