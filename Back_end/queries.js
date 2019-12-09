@@ -85,7 +85,7 @@ const deleteCharacter = (request, response) => {
 };
 
 const getParses = (request, response) => {
-    pool.query('SELECT parses.id, characters.character_name, classes.class_name, specs.spec_name, dps FROM parses ' +
+    pool.query('SELECT parses.id, characters.character_name, classes.class_name, specs.spec_name, dps, date FROM parses ' +
         'JOIN characters on parses.character = characters.id JOIN specs on parses.spec = specs.id ' +
         'JOIN classes on specs.class_id = classes.id;', (error, results) => {
         if (error) {
@@ -98,10 +98,10 @@ const getParses = (request, response) => {
 };
 
 const createParse = (request, response) => {
-    const { character_id, spec_id, dps } = request.body;
+    const { character_id, spec_id, dps, date } = request.body;
 
-    pool.query('INSERT INTO parses (character, spec, dps)' +
-        ' VALUES ($1, $2, $3)', [character_id, spec_id, dps],
+    pool.query('INSERT INTO parses (character, spec, dps, date)' +
+        ' VALUES ($1, $2, $3)', [character_id, spec_id, dps, date],
         (error, results) => {
             if (error) {
                 throw error
