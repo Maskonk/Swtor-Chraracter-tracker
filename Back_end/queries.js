@@ -148,5 +148,5 @@ const deleteParse = (request, response) => {
     })
 };
 
-module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter,
+module.exports = {getCharacters, getClasses, getGuilds, getSpecs, createCharacter, updateCharacter, deleteCharacter,
     getParses, createParse, updateParse, deleteParse};
