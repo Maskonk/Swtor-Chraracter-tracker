@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
 import NewCharacter from "./NewCharacter";
 import EditCharacter from "./EditCharacter";
+import NewParse from "./NewParse";
 
 class Main extends Component {
 
@@ -16,6 +17,7 @@ class Main extends Component {
             characters: [],
             guild_list: [],
             parses: [],
+            specs:[],
             selected_character: {},
             sort: {
                 column: null,
@@ -50,6 +52,11 @@ class Main extends Component {
         fetch(url + "parses")
             .then(res => res.json())
             .then(parses => {this.setState({ parses: parses })})
+            .catch(err => console.error);
+
+        fetch(url + "specs")
+            .then(res => res.json())
+            .then(specs => {this.setState({specs: specs})})
             .catch(err => console.error);
     }
 
@@ -168,8 +175,9 @@ class Main extends Component {
                                               guilds={this.state.guild_list}
                                               {...props} />
                     }}/>
-                    <Route exact path="/parses" render={() => <Parses parses={this.state.characters}
-                                                                          />} />
+                    <Route exact path="/parses" render={() => <Parses parses={this.state.parses}
+                                                                      specs={this.state.specs} />} />
+                    <Route exact path="/parse/new" render={() => <NewParse characters={this.state.characters}  specs={this.state.specs} />} />
                     <Route exact path="/stats" component={Stats} />
                 </React.Fragment>
             </Router>
