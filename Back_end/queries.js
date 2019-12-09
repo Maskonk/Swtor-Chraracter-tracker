@@ -52,7 +52,7 @@ const createCharacter = (request, response) => {
         if (error) {
             throw error
         }
-        response.status(201).send(`User added with ID: ${results.insertId}`)
+        response.status(201).send(`Character added with ID: ${results.insertId}`)
     })
 };
 
@@ -68,7 +68,7 @@ const updateCharacter = (request, response) => {
             if (error) {
                 throw error
             }
-            response.status(200).send(`User modified with ID: ${id}`)
+            response.status(200).send(`Character modified with ID: ${id}`)
         }
     )
 };
@@ -80,7 +80,7 @@ const deleteCharacter = (request, response) => {
         if (error) {
             throw error
         }
-        response.status(200).send(`User deleted with ID: ${id}`)
+        response.status(200).send(`Character deleted with ID: ${id}`)
     })
 };
 
@@ -106,7 +106,7 @@ const createParse = (request, response) => {
             if (error) {
                 throw error
             }
-            response.status(201).send(`User added with ID: ${results.insertId}`)
+            response.status(201).send(`Parse added with ID: ${results.insertId}`)
         })
 };
 
@@ -121,9 +121,20 @@ const updateParse = (request, response) => {
             if (error) {
                 throw error
             }
-            response.status(200).send(`User modified with ID: ${id}`)
+            response.status(200).send(`Parse modified with ID: ${id}`)
         }
     )
+};
+
+const deleteParse = (request, response) => {
+    const id = parseInt(request.params.id);
+
+    pool.query('DELETE FROM parses WHERE id = $1', [id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).send(`Parse deleted with ID: ${id}`)
+    })
 };
 
 module.exports = {getCharacters, getClasses, getGuilds, createCharacter, updateCharacter, deleteCharacter, getParses};
