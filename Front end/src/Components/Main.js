@@ -177,7 +177,9 @@ class Main extends Component {
                     }}/>
                     <Route exact path="/parses" render={() => <Parses parses={this.state.parses}
                                                                       specs={this.state.specs} />} />
-                    <Route exact path="/parse/new" render={() => <NewParse characters={this.state.characters}  specs={this.state.specs} />} />
+                    <Route exact path="/parse/new" render={(props) => <NewParse characters={this.state.characters}
+                                                                           specs={this.state.specs}
+                                                                           {...props}/>} />
                     <Route exact path="/stats" component={Stats} />
                 </React.Fragment>
             </Router>
