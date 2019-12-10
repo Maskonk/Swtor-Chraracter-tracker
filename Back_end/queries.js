@@ -112,7 +112,7 @@ const createParse = (request, response) => {
     const { character_id, spec_id, dps, date } = request.body;
 
     pool.query('INSERT INTO parses (character, spec, dps, date)' +
-        ' VALUES ($1, $2, $3)', [character_id, spec_id, dps, date],
+        ' VALUES ($1, $2, $3, $4)', [character_id, spec_id, dps, date],
         (error, results) => {
             if (error) {
                 throw error
