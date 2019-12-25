@@ -18,7 +18,7 @@ app.get('/specs', db.getSpecs);
 
 app.post('/characters', db.createCharacter);
 
-app.put('/character/edit/:id', db.updateCharacter);
+app.put('/characters/:id', db.updateCharacter);
 
 app.delete('/character/delete/:id', db.deleteCharacter);
 
