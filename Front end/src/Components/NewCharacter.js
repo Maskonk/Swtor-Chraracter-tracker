@@ -6,10 +6,10 @@ class NewCharacter extends Component {
         super(props);
         this.state = {
             name: "",
-            class_name: "",
+            className: "",
             role: "",
             level: 1,
-            renown_rank: 1,
+            renownRank: 1,
             social: 1,
             valor: 1,
             guild: "",
@@ -41,7 +41,7 @@ class NewCharacter extends Component {
     }
 
     handleClassChange(event) {
-        this.setState({class_name: event.target.value});
+        this.setState({className: event.target.value});
     }
 
     handleRoleChange(event) {
@@ -53,7 +53,7 @@ class NewCharacter extends Component {
     }
 
     handleRenownChange(event) {
-        this.setState({renown_rank: event.target.value});
+        this.setState({renownRank: event.target.value});
     }
 
     handleSocialChange(event) {
@@ -70,15 +70,15 @@ class NewCharacter extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        if (!this.state.name || !this.state.class_name || !this.state.role || !this.state.guild) {
+        if (!this.state.name || !this.state.className || !this.state.role || !this.state.guild) {
             return
         }
         const payload = {
             name: this.state.name,
-            class_name: this.state.class_name,
+            class_name: this.state.className,
             role: this.state.role,
             level: this.state.level,
-            renown_rank: this.state.renown_rank,
+            renown_rank: this.state.renownRank,
             social: this.state.social,
             valor: this.state.valor,
             guild: this.state.guild,
@@ -93,9 +93,9 @@ class NewCharacter extends Component {
     }
 
     render() {
-        const class_data = this.state.class_list.map(class_name => {
+        const class_data = this.state.class_list.map(className => {
             return (
-                <option key={class_name.id} value={class_name.id}>{class_name.class_name}</option>
+                <option key={className.id} value={className.id}>{className.class_name}</option>
             )});
 
         const guild_data = this.props.guilds.map(guild => {

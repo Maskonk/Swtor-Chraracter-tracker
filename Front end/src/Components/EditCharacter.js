@@ -7,8 +7,7 @@ class EditCharacter extends Component {
         super(props);
         this.state = {
             character: {},
-            class_list: [],
-            guild_list: [],
+            classList: [],
             character_fetched: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,11 +19,12 @@ class EditCharacter extends Component {
 
         fetch(url + "classes")
             .then(res => res.json())
-            .then(classes => {this.setState({ class_list: classes })})
+            .then(classes => {this.setState({ classList: classes })})
             .catch(err => console.error);
 
 
-        this.setState({character_fetched: true})
+        this.setState({character_fetched: true});
+        document.title = `Edit ${this.props.selectedCharacter.character_name}`;
     }
 
     handleSubmit(event) {
@@ -65,7 +65,7 @@ class EditCharacter extends Component {
     }
 
     render() {
-        const class_data = this.state.class_list.map(class_name => {
+        const class_data = this.state.classList.map(class_name => {
             return (
                 <option key={class_name.id} value={class_name.id}>{class_name.class_name}</option>
             )});
