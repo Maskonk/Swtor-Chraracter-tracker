@@ -20,7 +20,7 @@ app.post('/characters', db.createCharacter);
 
 app.put('/characters/:id', db.updateCharacter);
 
-app.delete('/character/delete/:id', db.deleteCharacter);
+app.delete('/characters/:id', db.deleteCharacter);
 
 app.get('/parses', db.getParses);
 
