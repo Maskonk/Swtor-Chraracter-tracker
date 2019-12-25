@@ -16,7 +16,7 @@ app.get('/guilds', db.getGuilds);
 
 app.get('/specs', db.getSpecs);
 
-app.post('/new_character', db.createCharacter);
+app.post('/characters', db.createCharacter);
 
 app.put('/character/edit/:id', db.updateCharacter);
 
