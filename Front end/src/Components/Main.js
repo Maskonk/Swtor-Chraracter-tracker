@@ -18,6 +18,7 @@ class Main extends Component {
             guild_list: [],
             parses: [],
             specs:[],
+            sorted_data: [],
             selected_character: {},
             sort: {
                 column: null,
@@ -41,7 +42,7 @@ class Main extends Component {
 
         fetch(url + "characters")
             .then(res => res.json())
-            .then(characters => {this.setState({ characters: characters })})
+            .then(characters => {this.setState({ characters: characters, sorted_data: characters })})
             .catch(err => console.error);
 
         fetch(url + "guilds")
@@ -139,7 +140,7 @@ class Main extends Component {
         }
 
         this.setState({
-            characters: sortedData,
+            sorted_data: sortedData,
             sort: {
                 column,
                 direction,
@@ -154,6 +155,7 @@ class Main extends Component {
                     <Nav/>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/characters" render={() => <Characters characters={this.state.characters}
+                                                                              sortedCharacters={this.state.sorted_data}
                                                                               onSort={this.onSort}
                                                                               sortFields={this.state.sort}
                                                                               guilds={this.state.guild_list}/>} />

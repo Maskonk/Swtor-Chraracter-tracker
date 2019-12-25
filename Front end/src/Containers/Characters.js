@@ -26,18 +26,18 @@ class Characters extends Component {
     }
 
     componentDidMount() {
-        this.setState({filtered_data: this.props.characters});
+        this.setState({filtered_data: this.props.sortedCharacters});
         document.title = "Characters - SWTOR Character Tracker"
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps !== this.props) {
-            this.setState({filtered_data: this.props.characters})
+            this.setState({filtered_data: this.props.sortedCharacters})
         }
     }
 
     filterData() {
-        let newFilter = this.props.characters;
+        let newFilter = this.props.sortedCharacters;
 
         if (this.state.filters.level) {
             if (this.state.filters.level === "!75") {
@@ -63,6 +63,10 @@ class Characters extends Component {
             newFilter = newFilter.filter(character => {
                 return character.guild_id === this.state.filters.guild
             })
+        }
+
+        if ((!this.state.filters.level)&&(!this.state.filters.role)&&(!this.state.filters.faction)&&(!this.state.filters.guild)) {
+            newFilter = this.props.characters
         }
         this.setState({filtered_data: newFilter})
     }
