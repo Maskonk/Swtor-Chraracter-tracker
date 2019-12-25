@@ -2,6 +2,10 @@ import React, {Component, Fragment} from 'react';
 import './Stats.css'
 
 class Stats extends Component {
+    componentDidMount() {
+        document.title = "Stat Tracker - SWTOR Character Tracker"
+    }
+
     render() {
         return (
             <Fragment>

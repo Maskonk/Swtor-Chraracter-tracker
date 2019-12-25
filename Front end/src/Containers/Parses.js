@@ -7,6 +7,10 @@ class Parses extends Component {
         this.state = {}
     }
 
+    componentDidMount() {
+        document.title = "Parses - SWTOR Character Tracker"
+    }
+
     render() {
         const table_data = this.props.parses.map(parse => {return(
             <tr key={parse.id}>

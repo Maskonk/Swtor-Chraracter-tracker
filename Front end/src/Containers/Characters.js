@@ -26,7 +26,8 @@ class Characters extends Component {
     }
 
     componentDidMount() {
-        this.setState({filtered_data: this.props.characters})
+        this.setState({filtered_data: this.props.characters});
+        document.title = "Characters - SWTOR Character Tracker"
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
