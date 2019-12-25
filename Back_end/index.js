@@ -26,9 +26,9 @@ app.get('/parses', db.getParses);
 
 app.post('/parses', db.createParse);
 
-app.put('parse/:id', db.updateParse);
+app.put('parses/:id', db.updateParse);
 
-app.delete('parse/:id', db.deleteParse);
+app.delete('parses/:id', db.deleteParse);
 
 
 app.listen(port, () => {
