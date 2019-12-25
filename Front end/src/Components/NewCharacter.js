@@ -84,7 +84,7 @@ class NewCharacter extends Component {
             guild: this.state.guild,
         };
 
-        fetch("http://127.0.0.1:3000/new_character", {
+        fetch("http://127.0.0.1:3000/characters", {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json'}

@@ -29,21 +29,21 @@ class EditCharacter extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        if (!this.props.selected_character.character_name || !this.props.selected_character.class_name ||
-            !this.props.selected_character.role || !this.props.selected_character.guild_id) {
+        if (!this.props.selectedCharacter.character_name || !this.props.selectedCharacter.class_name ||
+            !this.props.selectedCharacter.role || !this.props.selectedCharacter.guild_id) {
             return
         }
         const payload = {
-            name: this.props.selected_character.character_name,
-            class_name: this.props.selected_character.class_id,
-            role: this.props.selected_character.role,
-            level: this.props.selected_character.level,
-            renown_rank: this.props.selected_character.renown_rank,
-            social: this.props.selected_character.social_rank,
-            valor: this.props.selected_character.valor_rank,
-            guild: this.props.selected_character.guild_id,
+            name: this.props.selectedCharacter.character_name,
+            class_name: this.props.selectedCharacter.class_id,
+            role: this.props.selectedCharacter.role,
+            level: this.props.selectedCharacter.level,
+            renown_rank: this.props.selectedCharacter.renown_rank,
+            social: this.props.selectedCharacter.social_rank,
+            valor: this.props.selectedCharacter.valor_rank,
+            guild: this.props.selectedCharacter.guild_id,
         };
-        return fetch("http://127.0.0.1:3000/character/edit/" + this.props.selected_character.character_id, {
+        return fetch("http://127.0.0.1:3000/characters/" + this.props.selectedCharacter.character_id, {
             method: 'PUT',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json'}
@@ -56,7 +56,7 @@ class EditCharacter extends Component {
         const payload = {
             id: this.props.character.character_id
         };
-        fetch("http://127.0.0.1:3000/character/delete/" + this.props.selected_character.character_id, {
+        fetch("http://127.0.0.1:3000/characters/" + this.props.selectedCharacter.character_id, {
             method: 'DELETE',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json'}

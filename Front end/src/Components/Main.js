@@ -15,11 +15,11 @@ class Main extends Component {
         super(props);
         this.state = {
             characters: [],
-            guild_list: [],
+            guildList: [],
             parses: [],
             specs:[],
-            sorted_data: [],
-            selected_character: {},
+            sortedData: [],
+            selectedCharacter: {},
             sort: {
                 column: null,
                 direction: 'desc',
@@ -42,12 +42,12 @@ class Main extends Component {
 
         fetch(url + "characters")
             .then(res => res.json())
-            .then(characters => {this.setState({ characters: characters, sorted_data: characters })})
+            .then(characters => {this.setState({ characters: characters, sortedData: characters })})
             .catch(err => console.error);
 
         fetch(url + "guilds")
             .then(res => res.json())
-            .then(guilds => {this.setState({ guild_list: guilds })})
+            .then(guilds => {this.setState({ guildList: guilds })})
             .catch(err => console.error);
 
         fetch(url + "parses")
@@ -63,58 +63,58 @@ class Main extends Component {
 
     findCharacterById(id) {
         const character = this.state.characters.find(character => character.character_id === id);
-        if (this.state.selected_character !== character) {
-            this.setState({selected_character: character});
+        if (this.state.selectedCharacter !== character) {
+            this.setState({selectedCharacter: character});
         }
         return character;
     }
 
     handleNameChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.character_name = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     handleClassChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.class_id = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     handleRoleChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.role = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     handleLevelChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.level = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     handleRenownChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.renown_rank = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     handleSocialChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.social_rank = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     handleValorChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.valor_rank = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     handleGuildChange(event) {
-        let character = this.state.selected_character;
+        let character = this.state.selectedCharacter;
         character.guild_id = event.target.value;
-        this.setState({selected_character: character});
+        this.setState({selectedCharacter: character});
     }
 
     onSort(column, characters)  {
@@ -140,7 +140,7 @@ class Main extends Component {
         }
 
         this.setState({
-            sorted_data: sortedData,
+            sortedData: sortedData,
             sort: {
                 column,
                 direction,
@@ -155,11 +155,11 @@ class Main extends Component {
                     <Nav/>
                     <Route exact path="/" component={Home} />
                     <Route exact path="/characters" render={() => <Characters characters={this.state.characters}
-                                                                              sortedCharacters={this.state.sorted_data}
+                                                                              sortedCharacters={this.state.sortedData}
                                                                               onSort={this.onSort}
                                                                               sortFields={this.state.sort}
-                                                                              guilds={this.state.guild_list}/>} />
-                    <Route exact path="/character/new" render={(props) => <NewCharacter guilds={this.state.guild_list}
+                                                                              guilds={this.state.guildList}/>} />
+                    <Route exact path="/character/new" render={(props) => <NewCharacter guilds={this.state.guildList}
                                       {...props}/>} />
                     <Route path="/character/edit/:id" render={(props) => {
                         const id = props.match.params.id;
@@ -173,8 +173,8 @@ class Main extends Component {
                                               handleSocialChange={this.handleSocialChange}
                                               handleValorChange={this.handleValorChange}
                                               handleGuildChange={this.handleGuildChange}
-                                              selected_character={this.state.selected_character}
-                                              guilds={this.state.guild_list}
+                                              selectedCharacter={this.state.selectedCharacter}
+                                              guilds={this.state.guildList}
                                               {...props} />
                     }}/>
                     <Route exact path="/parses" render={() => <Parses parses={this.state.parses}

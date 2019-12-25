@@ -9,7 +9,7 @@ class Characters extends Component {
         super(props);
         this.state = {
             filter: null,
-            filtered_data: [],
+            filteredData: [],
             filters: {
                 level: null,
                 faction: null,
@@ -26,13 +26,13 @@ class Characters extends Component {
     }
 
     componentDidMount() {
-        this.setState({filtered_data: this.props.sortedCharacters});
+        this.setState({filteredData: this.props.sortedCharacters});
         document.title = "Characters - SWTOR Character Tracker"
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps !== this.props) {
-            this.setState({filtered_data: this.props.sortedCharacters})
+            this.setState({filteredData: this.props.sortedCharacters})
         }
     }
 
@@ -68,7 +68,7 @@ class Characters extends Component {
         if ((!this.state.filters.level)&&(!this.state.filters.role)&&(!this.state.filters.faction)&&(!this.state.filters.guild)) {
             newFilter = this.props.characters
         }
-        this.setState({filtered_data: newFilter})
+        this.setState({filteredData: newFilter})
     }
 
     handleLevelChange(event) {
@@ -124,7 +124,7 @@ class Characters extends Component {
     }
 
     render() {
-        const table_data = this.state.filtered_data.map((character, index) => {
+        const table_data = this.state.filteredData.map((character, index) => {
             return (
                 <tr key={index}>
                     <td> {index+1} </td>
@@ -146,16 +146,16 @@ class Characters extends Component {
                 <option key={guild.id} value={guild.id}>{guild.guild_name}</option>
             )});
 
-        const count75s = this.state.filtered_data.reduce((total, character) =>
+        const count75s = this.state.filteredData.reduce((total, character) =>
         {if (character.level === "75")
         {console.log(total); return total += 1}
         else {
             return total
         }}, 0);
 
-        const averageRenown = (this.state.filtered_data.reduce((total, character) => {return total += parseInt(character.renown_rank)}, 0)/ this.state.filtered_data.length).toFixed(2);
-        const averageSocial = (this.state.filtered_data.reduce((total, character) => {return total += parseInt(character.social_rank)}, 0)/ this.state.filtered_data.length).toFixed(2);
-        const averageValor = (this.state.filtered_data.reduce((total, character) => {return total += parseInt(character.valor_rank)}, 0)/ this.state.filtered_data.length).toFixed(2);
+        const averageRenown = (this.state.filteredData.reduce((total, character) => {return total += parseInt(character.renown_rank)}, 0)/ this.state.filteredData.length).toFixed(2);
+        const averageSocial = (this.state.filteredData.reduce((total, character) => {return total += parseInt(character.social_rank)}, 0)/ this.state.filteredData.length).toFixed(2);
+        const averageValor = (this.state.filteredData.reduce((total, character) => {return total += parseInt(character.valor_rank)}, 0)/ this.state.filteredData.length).toFixed(2);
 
         return (
             <React.Fragment>
@@ -192,15 +192,15 @@ class Characters extends Component {
                     <thead>
                         <tr>
                             <th> </th>
-                            <TableHeader headerName="Name" headerId="character_name" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Class" headerId="class_name" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Faction" headerId="faction_name" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Role" headerId="role" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Level" headerId="level" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Renown Rank" headerId="renown_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Social" headerId="social_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Valor" headerId="valor_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filtered_data}/>
-                            <TableHeader headerName="Guild" headerId="guild_name" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filtered_data}/>
+                            <TableHeader headerName="Name" headerId="character_name" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Class" headerId="class_name" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Faction" headerId="faction_name" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Role" headerId="role" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Level" headerId="level" onSort={this.props.onSort} sortFields={this.props.sortFields}  characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Renown Rank" headerId="renown_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Social" headerId="social_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Valor" headerId="valor_rank" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filteredData}/>
+                            <TableHeader headerName="Guild" headerId="guild_name" onSort={this.props.onSort} sortFields={this.props.sortFields} characterSet={this.state.filteredData}/>
                         </tr>
                     </thead>
                     <tbody>
