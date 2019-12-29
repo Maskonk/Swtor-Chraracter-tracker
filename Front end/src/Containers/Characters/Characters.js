@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Characters.css';
 import { Link } from "react-router-dom";
-import TableHeader from "../Components/TableHeader";
+import TableHeader from "../../Components/Characters/TableHeader";
 
 class Characters extends Component {
 

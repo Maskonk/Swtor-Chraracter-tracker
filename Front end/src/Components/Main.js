@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import Characters from "../Containers/Characters";
+import Characters from "../Containers/Characters/Characters";
 import Home from "./Home";
-import Parses from "../Containers/Parses";
+import Parses from "../Containers/Parses/Parses";
 import Stats from "../Containers/Stats";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
-import NewCharacter from "./NewCharacter";
-import EditCharacter from "./EditCharacter";
-import NewParse from "./NewParse";
+import NewCharacter from "./Characters/NewCharacter";
+import EditCharacter from "./Characters/EditCharacter";
+import NewParse from "./Parses/NewParse";
 
 class Main extends Component {
 

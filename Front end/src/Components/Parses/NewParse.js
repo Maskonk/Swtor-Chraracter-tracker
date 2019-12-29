@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import './NewCharacter.css';
+import '../Characters/NewCharacter.css';
 
 class NewParse extends Component {
     constructor(props) {
