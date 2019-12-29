@@ -18,6 +18,10 @@ class NewParse extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        document.title = "New Parse - SWTOR Character Tracker"
+    }
+
     handleCharacterChange(event) {
         this.setState({character: event.target.value});
     }

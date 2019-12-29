@@ -24,7 +24,7 @@ class Parses extends Component {
         return (
             <Fragment>
                 <h1>Parses</h1>
-                <button><Link to="/parse/new"> Add new character </Link> </button>
+                <button><Link to="/parse/new"> Add new parse </Link> </button>
                 <table>
                     <thead>
                         <tr>
