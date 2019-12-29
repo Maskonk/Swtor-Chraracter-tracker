@@ -70,7 +70,6 @@ const createCharacter = (request, response) => {
 const updateCharacter = (request, response) => {
     const id = parseInt(request.params.id);
     const { name, class_name, role, level, renown_rank, social, valor, guild } = request.body;
-    console.log(request.body);
     pool.query(
         'UPDATE characters SET character_name = $1, class = $2, role=$3, level=$4, renown_rank=$5, social_rank=$6, valor_rank=$7, guild=$8' +
         ' WHERE id = $9',
