@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import {Link} from "react-router-dom";
+import DeleteButton from "../../Components/Parses/DeleteButton"
 
 class Parses extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class Parses extends Component {
                 <td>{parse.spec_name}</td>
                 <td>{parse.dps}</td>
                 <td>{parse.date}</td>
+                <td><DeleteButton id={parse.id} history={this.props.history}/></td>
             </tr>
         )});
         return (

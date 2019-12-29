@@ -55,7 +55,6 @@ class EditCharacter extends Component {
     }
 
     handleDelete(event) {
-        console.log(this.props.character.character_id);
         const payload = {
             id: this.props.character.character_id
         };
