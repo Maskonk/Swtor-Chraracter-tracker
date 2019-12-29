@@ -24,11 +24,10 @@ class EditCharacter extends Component {
 
 
         this.setState({character_fetched: true});
-        // document.title = `Edit ${this.props.selectedCharacter.character_name}`;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        document.title = `Edit ${this.props.selectedCharacter.character_name}`;
+        document.title = `Edit ${this.props.selectedCharacter.character_name} - SWTOR Character Tracker`;
     }
 
     handleSubmit(event) {

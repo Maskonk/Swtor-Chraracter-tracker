@@ -34,6 +34,7 @@ class NewCharacter extends Component {
             .then(res => res.json())
             .then(classes => {this.setState({ class_list: classes })})
             .catch(err => console.error);
+        document.title = "New character - SWTOR Character Tracker"
     }
 
     handleNameChange(event) {
