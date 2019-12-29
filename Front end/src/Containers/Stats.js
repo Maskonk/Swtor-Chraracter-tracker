@@ -11,7 +11,7 @@ class Stats extends Component {
             <Fragment>
                 <h1>Stat Calculator</h1>
                 <div id="head">
-                    <label for="head-stat-select"> Head </label>
+                    <label htmlFor="head-stat-select"> Head </label>
                     <select id="head-stat-select" defaultValue="default">
                         <option value="default" disabled> Select </option>
                         <option value="1" > 1 </option>
@@ -27,7 +27,7 @@ class Stats extends Component {
                     </select>
                 </div>
                 <div id="gloves">
-                    <label for="gloves-stat-select"> Gloves </label>
+                    <label htmlFor="gloves-stat-select"> Gloves </label>
                     <select id="gloves-stat-select" defaultValue="default">
                         <option value="default" disabled> Select </option>
                         <option value="1" > 1 </option>
