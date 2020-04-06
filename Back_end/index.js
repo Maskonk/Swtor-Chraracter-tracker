@@ -30,6 +30,10 @@ app.put('/parses/:id', db.updateParse);
 
 app.delete('/parses/:id', db.deleteParse);
 
+app.get('/parse_stats', db.parseStats);
+
+app.get('/character_count', db.characterCount);
+
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
