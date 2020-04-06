@@ -14,7 +14,7 @@ const Nav = () => (
             <Link to={{pathname: '/parses', state: {test: true}}}> Parses </Link>
         </li>
         <li>
-            <Link to="/stats"> Stat Calculator </Link>
+            <Link to="/stats"> Parsing Stats </Link>
         </li>
     </ul>
 );
