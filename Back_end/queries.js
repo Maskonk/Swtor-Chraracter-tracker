@@ -8,10 +8,11 @@ const pool = new Pool({
 });
 
 const getCharacters = (request, response) => {
-    pool.query('SELECT characters.id character_id, characters.character_name, classes.id class_id, classes.class_name, role, level, ' +
-        'social_rank, valor_rank, renown_rank, guilds.id guild_id, guilds.guild_name, factions.id faction_id, factions.faction_name ' +
-        'FROM characters join guilds on characters.guild = guilds.id join classes on characters.class = classes.id ' +
-        'join factions on classes.faction = factions.id ORDER BY characters.character_name;', (error, results) => {
+    pool.query('SELECT characters.id character_id, characters.character_name, c.id class_id, c.class_name, ' +
+        'role, level, social_rank, valor_rank, renown_rank, guilds.id guild_id, guilds.guild_name, ' +
+        'factions.id faction_id, factions.faction_name ' +
+        'FROM characters join guilds on characters.guild_id = guilds.id join classes c on characters.class_id = c.id ' +
+        'join factions on c.faction = factions.id ORDER BY characters.character_name;', (error, results) => {
         if (error) {
             console.log(error);
             response.status(500).json(error)
@@ -44,7 +45,8 @@ const getGuilds = (request, response) => {
 };
 
 const getSpecs = (request, response) => {
-    pool.query('SELECT specs.id, specs.spec_name, specs.class_id, classes.class_name from specs join classes on specs.class_id = classes.id;', (error, results) => {
+    pool.query('SELECT specs.id, specs.spec_name, specs.class_id, classes.class_name from specs ' +
+        'join classes on specs.class_id = classes.id;', (error, results) => {
         if (error) {
             console.log(error);
             response.status(500).json(error)
@@ -57,7 +59,7 @@ const getSpecs = (request, response) => {
 const createCharacter = (request, response) => {
     const { name, class_name, role, level, renown_rank, social, valor, guild} = request.body;
 
-    pool.query('INSERT INTO characters (character_name, class, role, level, renown_rank, social_rank, valor_rank, guild)' +
+    pool.query('INSERT INTO characters (character_name, class_id, role, level, renown_rank, social_rank, valor_rank, guild_id)' +
         ' VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [name, class_name, role, level, renown_rank, social, valor, guild],
         (error, results) => {
         if (error) {
@@ -71,7 +73,7 @@ const updateCharacter = (request, response) => {
     const id = parseInt(request.params.id);
     const { name, class_name, role, level, renown_rank, social, valor, guild } = request.body;
     pool.query(
-        'UPDATE characters SET character_name = $1, class = $2, role=$3, level=$4, renown_rank=$5, social_rank=$6, valor_rank=$7, guild=$8' +
+        'UPDATE characters SET character_name = $1, class_id = $2, role=$3, level=$4, renown_rank=$5, social_rank=$6, valor_rank=$7, guild_id=$8' +
         ' WHERE id = $9',
         [name, class_name, role, level, renown_rank, social, valor, guild, id],
         (error, results) => {
