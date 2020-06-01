@@ -149,5 +149,31 @@ const deleteParse = (request, response) => {
     })
 };
 
+const parseStats = (request, response) => {
+    pool.query('select spec_name, count(*), max(parses.dps), avg(parses.dps) from parses ' +
+        'join specs on parses.spec = specs.id group by spec_name order by spec_name',
+        (error, results) => {
+        if (error) {
+            console.log(error);
+            response.status(500).json(error)
+        }
+        else {
+            response.status(200).json(results.rows)
+        }})
+};
+
+const characterCount = (request, response) => {
+    pool.query('select class_name, count(*) from characters join classes c2 on characters.class = c2.id ' +
+        'group by class_name order by class_name;',
+        (error, results) => {
+            if (error) {
+                console.log(error);
+                response.status(500).json(error)
+            }
+            else {
+                response.status(200).json(results.rows)
+            }})
+};
+
 module.exports = {getCharacters, getClasses, getGuilds, getSpecs, createCharacter, updateCharacter, deleteCharacter,
-    getParses, createParse, updateParse, deleteParse};
+    getParses, createParse, updateParse, deleteParse, parseStats, characterCount};

@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import './Stats.css'
+import DeleteButton from "../Components/Parses/DeleteButton";
 
 class Stats extends Component {
     componentDidMount() {
@@ -7,33 +8,30 @@ class Stats extends Component {
     }
 
     render() {
+        const table_data = this.props.stats.map(stat => {return(
+            <tr key={stat.spec_name}>
+                <td>{stat.spec_name}</td>
+                <td>{stat.count}</td>
+                <td>{Math.round(stat.max)}</td>
+                <td>{Math.round(stat.avg)}</td>
+            </tr>
+        )});
         return (
             <Fragment>
-                <h1>Stat Calculator</h1>
-                <div id="head">
-                    <label htmlFor="head-stat-select"> Head </label>
-                    <select id="head-stat-select" defaultValue="default">
-                        <option value="default" disabled> Select </option>
-                        <option value="1" > 1 </option>
-                        <option value="2"> 2 </option>
-                    </select>
-                </div>
-                <div id="chest">
-                    <label htmlFor="chest-stat-select"> Chest </label>
-                    <select id="chest-stat-select" defaultValue="default">
-                        <option value="default" disabled> Select</option>
-                        <option value="1"> 1</option>
-                        <option value="2"> 2</option>
-                    </select>
-                </div>
-                <div id="gloves">
-                    <label htmlFor="gloves-stat-select"> Gloves </label>
-                    <select id="gloves-stat-select" defaultValue="default">
-                        <option value="default" disabled> Select </option>
-                        <option value="1" > 1 </option>
-                        <option value="2"> 2 </option>
-                    </select>
-                </div>
+                <h1>Parses</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <td> Spec </td>
+                            <td> No.of Parses </td>
+                            <td> Highest Parse </td>
+                            <td> Average Parse </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {table_data}
+                    </tbody>
+                </table>
             </Fragment>
         )
     }

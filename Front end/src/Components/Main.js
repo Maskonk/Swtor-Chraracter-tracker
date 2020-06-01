@@ -19,6 +19,8 @@ class Main extends Component {
             parses: [],
             specs:[],
             sortedData: [],
+            parsingStats: [],
+            characterCount: [],
             selectedCharacter: {},
             sort: {
                 column: null,
@@ -58,6 +60,11 @@ class Main extends Component {
         fetch(url + "specs")
             .then(res => res.json())
             .then(specs => {this.setState({specs: specs})})
+            .catch(err => console.error);
+
+        fetch(url + "parse_stats")
+            .then(res => res.json())
+            .then(stats => {this.setState({parsingStats: stats})})
             .catch(err => console.error);
     }
 
@@ -183,7 +190,8 @@ class Main extends Component {
                     <Route exact path="/parse/new" render={(props) => <NewParse characters={this.state.characters}
                                                                            specs={this.state.specs}
                                                                            {...props}/>} />
-                    <Route exact path="/stats" component={Stats} />
+                    <Route exact path="/stats" render={(props) => <Stats stats={this.state.parsingStats}
+                                                                            {...props}/>} />
                 </React.Fragment>
             </Router>
         )
