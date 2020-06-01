@@ -62,7 +62,7 @@ class Main extends Component {
     }
 
     findCharacterById(id) {
-        const character = this.state.characters.find(character => character.character_id === id);
+        const character = this.state.characters.find(character => {return character.character_id === parseInt(id)});
         if (this.state.selectedCharacter !== character) {
             this.setState({selectedCharacter: character});
         }
