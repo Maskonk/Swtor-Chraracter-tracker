@@ -8,7 +8,8 @@ class NewParse extends Component {
             character: 0,
             spec: 0,
             date: "",
-            dps: 0
+            dps: 0,
+            filteredSpecs: []
         };
 
         this.handleCharacterChange = this.handleCharacterChange.bind(this);
@@ -23,7 +24,11 @@ class NewParse extends Component {
     }
 
     handleCharacterChange(event) {
-        this.setState({character: event.target.value});
+        let characterSelected = this.props.characters.find(character => character.character_id == event.target.value)
+        let filteredSpecs = this.props.specs.filter(spec => spec.class_name === characterSelected.class_name)
+        console.log(filteredSpecs)
+        this.setState({character: event.target.value, filteredSpecs: filteredSpecs});
+        console.log(this.state.filteredSpecs)
     }
 
     handleSpecChange(event) {
@@ -59,7 +64,7 @@ class NewParse extends Component {
     }
 
     render() {
-        const spec_data = this.props.specs.map(spec => {
+        const spec_data = this.state.filteredSpecs.map(spec => {
             return(
                 <option key={spec.id} value={spec.id}>{spec.spec_name}</option>
             )});
